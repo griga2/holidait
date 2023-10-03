@@ -1,0 +1,22 @@
+<script setup>
+import Table from './components/Table.vue'
+
+const slaeves = [
+    {
+        name:"chekcha",
+        id:1,
+    }
+]
+
+</script>
+
+<template>
+    <Table>
+        
+    </Table>
+</template>
+
+<style scoped>
+
+
+</style>
