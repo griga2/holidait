@@ -16,9 +16,6 @@ const slaeves = [
         
     </Table>
 
-    <DayCircle>
-        
-    </DayCircle>
 </template>
 
 <style scoped>
