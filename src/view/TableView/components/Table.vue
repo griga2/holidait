@@ -6,6 +6,7 @@ import { useTableStore } from '../store/index'
 const {
     table,
     updateTable,
+    addSlave,
 } = useTableStore();
 
 updateTable();
@@ -13,7 +14,7 @@ updateTable();
 const old_table = new Array(table.old?.length);
 
 </script>
-
+    
 
 <template>
 
@@ -33,14 +34,16 @@ const old_table = new Array(table.old?.length);
         <section id="main_table_block">
             <table id="left_bar">
                 <tr class="slave_name" v-for="row in table.rows">
-                    <article id="">
+                    <section>
                         <a class="slave">{{row.slave.name}}</a>
-                        <section id="button">
-                            <button @click="() => {
-                                table.rows.push({slave:{name:'Oleg'}})
-                            }" type="button">Button</button>
-                        </section>
-                    </article>
+                    </section>
+                </tr>
+                <tr>
+                    <section id="button">
+                        <button @click="() => {
+                            addSlave();
+                        }" type="button">Button</button>
+                    </section>
                 </tr>
             </table>
             <div style='display:grid;
