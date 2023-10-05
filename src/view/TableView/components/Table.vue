@@ -1,48 +1,16 @@
 <script setup>
 
+import { useTableStore } from '../store/index'
 
-const table = {
-    old:{
-        length:31,
-    },
-    now:{
-        length:30,
-    },
-    next:{
-        length:31,
-    },
-    rows:[
-        {
-            slave:{
+// access the `store` variable anywhere in the component ✨
+const {
+    table,
+    updateTable,
+} = useTableStore();
 
-            },
-            old:[
-                {
-                    type:"",
-                    num:"",
-                week_day:"",
-                }
-            ],
-            now:[
-                {
-                    type:"",
-                    num:"",
-                week_day:"",
-                }
-            ],
-            next:[
-                {
-                    type:"",
-                    num:"",
-                week_day:"",
-                }
-            ]
-        }
+updateTable();
 
-    ]
-};
-
-const old_table = new Array(table.old.length);
+const old_table = new Array(table.old?.length);
 
 </script>
 
