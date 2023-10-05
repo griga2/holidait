@@ -15,7 +15,6 @@ const slaeves = [
     <Table>
         
     </Table>
-
 </template>
 
 <style scoped>
