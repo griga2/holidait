@@ -11,14 +11,15 @@ const {
 
 updateTable();
 
-const old_table = new Array(table.old?.length);
 
+
+// console.log(table);
 </script>
     
 
 <template>
 
-    <head>
+    <!-- <head>
         <label>
             <input type="checkbox" class="alertCheckbox" autocomplete="off" />
             <div class="alert info">
@@ -27,13 +28,13 @@ const old_table = new Array(table.old?.length);
               <br class="clear"/></span>
             </div>
           </label>
-      </head>
+      </head> -->
 
     <main>
             
         <section id="main_table_block">
             <table id="left_bar">
-                <tr class="slave_name" v-for="row in table.rows">
+                <tr class="slave_name" v-for="row in table.value.rows">
                     <section>
                         <a class="slave">{{row.slave.name}}</a>
                     </section>
@@ -49,21 +50,21 @@ const old_table = new Array(table.old?.length);
             <div style='display:grid;
             grid-template-columns: 1200px 1200px 1200px;'>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.rows">
+                <tr class="mount_row" v-for="row in table.value.rows">
                     <td v-for="day in row.old">
-                        <a class="day">{{day}}</a>
+                        <a class="day">{{day.status}}</a>
                     </td>
                 </tr>
             </table>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.rows">
+                <tr class="mount_row" v-for="row in table.value.rows">
                     <td v-for="day in row.now">
                        
                     </td>
                 </tr>
             </table>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.rows">
+                <tr class="mount_row" v-for="row in table.value.rows">
                     <td class="" v-for="day in row.next">
                         <a class="day">{{'d'}}</a>
                     </td>
@@ -140,12 +141,10 @@ const old_table = new Array(table.old?.length);
     background: rgb(183, 178, 198);
     border: 1px solid;
     color: black;
-    top: 70px;
-    left: 70px;
 }
 
 #slave_circle{
-    height: 45px;
+    height: 49px;
 
 }
 

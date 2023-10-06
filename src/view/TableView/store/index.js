@@ -18,7 +18,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      updateTable();
+      await updateTable();
     }
 
     const updateSlave =  async (slave) => {``
@@ -79,6 +79,7 @@ export const useTableStore = defineStore('table_store', () => {
       console.log(response.data)
 
       table.value = response.data;  
+      console.log(table.value);
     }
     
     return { table,
