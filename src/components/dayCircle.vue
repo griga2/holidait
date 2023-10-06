@@ -4,10 +4,8 @@
 const props = defineProps({
     status:String,
     error:Boolean,
-    isDayoff:Boolean,
+    is_dayoff:Boolean,
 })
-
-
 
 const emit = defineEmits(['rightClick','leftClick'])
 
@@ -20,22 +18,8 @@ const emit = defineEmits(['rightClick','leftClick'])
     margin: 2px;
     ">
     <div style="
-        position: relative;
-        top: -1px;
-        left: 17px;">
-        <article v-if='isDayoff'
-        >
-            
-            <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.0550874 1.022L24.9247 26.0592L24.9945 12.6822L25.0246 6.91944L24.7933 4.36486L23.7828 2.37846L22.2768 1.39107L20.2738 0.904619L17.7739 0.919134L11.774 0.953967L0.0550874 1.022Z" fill="#FF7A7A"/>
-            </svg>
-
-            
-        </article>
-    </div>
-    <div style="
     position: relative;
-    top: -42px;
+    /* top: -42px; */
     left: 0px;
     z-index: -1;">
         <article v-if='status==="empty"'>
@@ -74,6 +58,21 @@ const emit = defineEmits(['rightClick','leftClick'])
             <rect width="41.8542" height="42" rx="6" fill="#FFFEFE"/>
             <path d="M8.4989 39.6746L40.2496 8.5718C43.4495 5.43719 41.2301 8.28779e-06 36.7507 8.66736e-06L22.6785 9.85981e-06L5 1.13578e-05C2.23858 1.15918e-05 3.50201e-06 2.23859 3.75108e-06 5.00001L6.55634e-06 36.1028C6.95587e-06 40.5325 5.3345 42.7744 8.4989 39.6746Z" fill="#9AB0FE"/>
             </svg>
+        </article>
+        
+    </div>
+    <div style="
+        position: relative;
+        top: -43px;
+        left: 17px;">
+        <article v-if='is_dayoff'
+        >
+            
+            <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.0550874 1.022L24.9247 26.0592L24.9945 12.6822L25.0246 6.91944L24.7933 4.36486L23.7828 2.37846L22.2768 1.39107L20.2738 0.904619L17.7739 0.919134L11.774 0.953967L0.0550874 1.022Z" fill="#FF7A7A"/>
+            </svg>
+
+            
         </article>
     </div>
     </main>

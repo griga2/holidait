@@ -1,5 +1,4 @@
 <script setup>
-import DayCircle from '../../components/dayCircle.vue';
 import Table from './components/Table.vue'
 
 const slaeves = [

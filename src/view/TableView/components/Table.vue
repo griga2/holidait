@@ -1,6 +1,8 @@
 <script setup>
 
 import { useTableStore } from '../store/index'
+import DayCircle from '../../../components/dayCircle.vue';
+
 
 // access the `store` variable anywhere in the component ✨
 const {
@@ -50,23 +52,23 @@ updateTable();
             <div style='display:grid;
             grid-template-columns: 1200px 1200px 1200px;'>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.value.rows">
-                    <td v-for="day in row.old">
-                        <a class="day">{{day.status}}</a>
+                <tr class="mount_row" v-for="row of table.value.rows">
+                    <td v-for="day of row.old.days">
+                        <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
                     </td>
                 </tr>
             </table>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.value.rows">
-                    <td v-for="day in row.now">
-                       
+                <tr class="mount_row" v-for="row of table.value.rows">
+                    <td v-for="day of row.now.days">
+                        <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
                     </td>
                 </tr>
             </table>
             <table class="mount_table">
-                <tr class="mount_row" v-for="row in table.value.rows">
-                    <td class="" v-for="day in row.next">
-                        <a class="day">{{'d'}}</a>
+                <tr class="mount_row" v-for="row of table.value.rows">
+                    <td class="" v-for="day of row.next.days">
+                        <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
                     </td>
                 </tr> 
             </table>
@@ -156,7 +158,7 @@ updateTable();
 
 .mount_table{
     border: 1px solid black;
-    width: 1200px;
+    /* width: 1200px; */
     padding-left: 19vh;
     height: 49px;
 
