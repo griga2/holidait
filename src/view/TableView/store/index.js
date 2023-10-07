@@ -6,6 +6,54 @@ export const useTableStore = defineStore('table_store', () => {
     
     const table = reactive({});
     const back_url = ref("http://192.168.0.13:3000");
+    const current_period = ref('');
+    const current_user = ref('');
+    const current_to_settings = ref('')
+
+
+    const createPeriod = async (day) => {
+
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/period`,
+        data : day
+      };
+
+      const response = await axios.request(config);
+      console.log(response.data)
+
+      await updateRow();
+    }
+
+    const updatePeriod = async (day) => {
+
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/updatePeriod`,
+        data : day
+      };
+      
+      const response = await axios.request(config);
+      console.log(response.data)
+
+      await updateRow();
+    }
+
+    const updateRow = async (id) => {
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/row`,
+        data : id
+      };
+
+      const response = await axios.request(config);
+      console.log(response.data)
+
+      await updateRow();
+    }
     
     const deleteSlave = async (id) => {
       let config = {
@@ -76,10 +124,13 @@ export const useTableStore = defineStore('table_store', () => {
       };
 
       const response = await axios.request(config);
-      console.log(response.data)
+      // console.log(response.data)
 
-      table.value = response.data;  
-      console.log(table.value);
+      table.value = await response.data;  
+
+
+      console.log((table.value?.rows?.length * 49 * -1 ) + 'px')
+      console.log(table.value.rows.length);
     }
     
     const create = async () => {
@@ -105,7 +156,12 @@ export const useTableStore = defineStore('table_store', () => {
     }
 
     return { table,
+      current_period,
+      current_to_settings,
+      current_user,
+      updatePeriod,
       updateTable,
+      createPeriod,
       addSlave,
       updateSlave, 
       deleteSlave}

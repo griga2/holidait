@@ -7,8 +7,6 @@ const props = defineProps({
     is_dayoff:Boolean,
 })
 
-const emit = defineEmits(['rightClick','leftClick'])
-
 </script>
 
 <template>
