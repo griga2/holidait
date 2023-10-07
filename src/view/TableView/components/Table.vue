@@ -50,8 +50,10 @@ updateTable();
                 </tr>
             </table>
             <div style='display:grid;
-            grid-template-columns: 1200px 1200px 1200px;'>
-            <table class="mount_table">
+            grid-template-columns: 1800px 1800px 1800px;'>
+            <table class="mount_table"
+            style="
+            padding-left:19vh">
                 <tr class="mount_row" v-for="row of table.value.rows">
                     <td v-for="day of row.old.days">
                         <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
@@ -138,30 +140,27 @@ updateTable();
     position: sticky;
     display: block;
     width: 100%;
-    height: 49px;
+    height: 48px;
     flex-direction: column;
     background: rgb(183, 178, 198);
-    border: 1px solid;
     color: black;
+    z-index: 3;
 }
 
 #slave_circle{
-    height: 49px;
+    height: 48px;
 
 }
 
 .day{
     border: 1px solid black;
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
 }
 
 .mount_table{
-    border: 1px solid black;
-    /* width: 1200px; */
-    padding-left: 19vh;
-    height: 49px;
-
+    border: 4px solid black;
+    width: 1600px;
 }
 
 #main_table_block{

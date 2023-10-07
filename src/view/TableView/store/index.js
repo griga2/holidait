@@ -64,8 +64,8 @@ export const useTableStore = defineStore('table_store', () => {
 
       const data = {
         "dangenMasterId":"6515bd540e4a06f8edfffbb9",
-        "year":"2023",
-        "mounth":"5"
+        "year":2023,
+        "mounth":5,
       }
 
       let config = {
