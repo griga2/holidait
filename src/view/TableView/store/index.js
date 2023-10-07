@@ -82,9 +82,33 @@ export const useTableStore = defineStore('table_store', () => {
       console.log(table.value);
     }
     
+    const create = async () => {
+
+      const data = {
+        "dangenMasterId":"6515bd540e4a06f8edfffbb9",
+        "year":2023,
+        "mounth":5,
+      }
+
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/table`,
+        data : data
+      };
+
+      const response = await axios.request(config);
+      console.log(response.data)
+
+      table.value = response.data;  
+      console.log(table.value);
+    }
+
     return { table,
       updateTable,
       addSlave,
       updateSlave, 
       deleteSlave}
   })
+
+  
