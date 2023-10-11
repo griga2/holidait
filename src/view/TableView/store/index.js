@@ -5,10 +5,25 @@ import axios from 'axios'
 export const useTableStore = defineStore('table_store', () => {
     
     const table = reactive({});
-    const back_url = ref("http://192.168.0.13:3000");
+    const back_url = ref("http://192.168.0.10:3000");
     const current_period = ref('');
-    const current_user = ref('');
+    const current_slave = ref('');
     const current_to_settings = ref('')
+
+
+    const deletePeriod = async (periodId) => {
+      let config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/period`,
+        data : {periodId:periodId}
+      };
+
+      const response = await axios.request(config);
+      console.log(response.data)
+
+      await updateRow();
+    }
 
 
     const createPeriod = async (day) => {
@@ -158,12 +173,13 @@ export const useTableStore = defineStore('table_store', () => {
     return { table,
       current_period,
       current_to_settings,
-      current_user,
+      current_slave,
       updatePeriod,
       updateTable,
       createPeriod,
       addSlave,
-      updateSlave, 
+      updateSlave,
+      deletePeriod, 
       deleteSlave}
   })
 

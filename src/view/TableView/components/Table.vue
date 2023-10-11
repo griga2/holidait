@@ -8,16 +8,24 @@ import DayCircle from '../../../components/dayCircle.vue';
 const {
     table,
     current_period,
-    current_user,
+    current_slave,
     current_to_settings,
     updateTable,
     addSlave,
     updatePeriod,
-    createPeriod
+    createPeriod,
+    deletePeriod
 } = useTableStore();
 
 updateTable();
 
+const resaisebleDayStatus = [
+    "box",
+    "box_start",
+    "box_holi",
+    "holi",
+
+]
 
 // console.log(table);
 </script>
@@ -46,16 +54,26 @@ updateTable();
             style="
             padding-left:19vh">
                 <tr class="mount_row" v-for="row of table.value?.rows">
-                    <td v-for="day of row.old.days">
+                    <td class="day" v-for="day of row.old.days">
                         <DayCircle @click='async () => {
                             if (day.type === "empty" && !current_period) {
                                 const data = {year:next?.year,mount:next?.mount,day:day?.number,slaveId:row.slave._id};
                                 current_period = await createPeriod(data);
-                                current_user = row.slave._id;
+                                current_slave = row.slave._id;
                             } 
-                            if (day.type === "empty" && current_period && current_user === row.slave._id) {
+                            if (day.type === "empty" && current_period && current_slave === row.slave._id) {
+                                current_slave = row.slave._id;
                                 const data = {year:next?.year,mount:next?.mount,day:day?.number,periodId:current_period};
                                 current_period = await updatePeriod(data);
+                            }
+                            if (resaisebleDayStatus.includes(day.status)) {
+                                const data = {year:next?.year,mount:next?.mount,day:day?.number,periodId:current_period};
+                                current_period = await updatePeriod(data); 
+                            }
+                            if (day.status == "holi_finish"); {
+                                <!-- const data = {year:next?.year,mount:next?.mount,day:day?.number,periodId:current_period}; -->
+                                current_period = "";
+                                await deletePeriod(data);
                             }
                         }'
                         :status="day.type"
@@ -65,49 +83,58 @@ updateTable();
             </table>
             <table class="mount_table">
                 <tr class="mount_row" v-for="row of table.value?.rows">
-                    <td v-for="day of row.now.days">
+                    <td class="day" v-for="day of row.now.days">
                         <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
                     </td>
                 </tr>
             </table>
             <table class="mount_table">
                 <tr class="mount_row" v-for="row of table.value?.rows">
-                    <td class="" v-for="day of row.next.days">
+                    <td  class="day" v-for="day of row.next.days">
                         <DayCircle :status="day.type" :is_dayoff="day.isDayoff"></DayCircle>
                     </td>
                 </tr> 
             </table>
-            <table id="left_bar"
-            :style="
-            {
-                top: (table.value?.rows?.length * 49 * -1 ) -5 + 'px',
-                left: '0px',
-            }">
-                <tr class="slave_name" v-for="row in table.value?.rows">
-                    <section>
-                        <a class="slave">{{row.slave.name}}</a>
-                    </section>
-                    <section v-if="current_to_settings"
-                    style="
-                        position: sticky;
-                        left:19vh;
-                        height: 49px;
-                        width: calc(100% - 19vh);
-                    ">
-
-                    </section>
-                </tr>
-                <tr>
-                    <section id="button">
-                        <button @click="() => {
-                            addSlave();
-                        }" type="button">Button</button>
-                    </section>
-                </tr>
-            </table>
+            
             </div>
+            
         </section>
-       
+        
+        <table id="left_bar"
+        :style="{
+            top: (table.value?.rows?.length * 49 * -1) - 28 + 'px',
+            left:'0px',
+        }"
+       >
+            <tr class="slave_name" v-for="row in table.value?.rows">
+                <slave @click='async () => {
+                    if (current_slave === row?.slave.slaveId) {
+                        
+                    }
+                }
+
+                <section>
+                    <a class="slave">{{row.slave.name}}</a>
+                </section>
+                <section v-if="current_to_settings"
+                style="
+                    position: sticky;
+                    left:19vh;
+                    height: 49px;
+                    width: calc(100% - 19vh);
+                ">
+
+                </section>
+            </tr>
+            <tr>
+                <section id="button">
+                    <button @click="() => {
+                        addSlave();
+                        updateTable();
+                    }" type="button">Button</button>
+                </section>
+            </tr>
+        </table>
     </main>
 
 </template>
@@ -116,7 +143,7 @@ updateTable();
 
 .alertText {
     display: table;
-    margin: 0 auto;
+    margin: auto;
     text-align: center;
     font-size: 16px;
 }
@@ -133,7 +160,7 @@ updateTable();
     background-color: #43499f; 
     border: none;
     color: rgb(0, 0, 0);
-    padding: 15px 32px;
+    padding: 15px 32px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -155,6 +182,7 @@ updateTable();
     display: flex;
     flex-direction: column;
     position: relative;
+    z-index: 4;
 }
 
 * {
@@ -186,8 +214,8 @@ updateTable();
 }
 
 .day{
-    height: 48px;
-    width: 48px;
+    height: 46px;
+    width: 46px;
 }
 
 .mount_table{
@@ -195,9 +223,10 @@ updateTable();
 }
 
 #main_table_block{
-    display:inline-block;
-    overflow-x: auto;
+    display: inline-block;
+    overflow-x: scroll;
     width: 100%;
+    position: relative;
 }
 
 </style>
