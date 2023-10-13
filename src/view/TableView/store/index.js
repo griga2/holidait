@@ -5,7 +5,7 @@ import axios from 'axios'
 export const useTableStore = defineStore('table_store', () => {
     
     const table = reactive({});
-    const back_url = ref("http://192.168.0.10:3000");
+    const back_url = ref("http://26.212.63.71:3000");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')

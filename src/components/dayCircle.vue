@@ -74,8 +74,6 @@ const props = defineProps({
             <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.0550874 1.022L24.9247 26.0592L24.9945 12.6822L25.0246 6.91944L24.7933 4.36486L23.7828 2.37846L22.2768 1.39107L20.2738 0.904619L17.7739 0.919134L11.774 0.953967L0.0550874 1.022Z" fill="#FF7A7A"/>
             </svg>
-
-            
         </article>
     </div>
     </main>
