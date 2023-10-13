@@ -70,8 +70,7 @@ const resaisebleDayStatus = [
                                 const data = {year:next?.year,mount:next?.mount,day:day?.number,periodId:current_period};
                                 current_period = await updatePeriod(data); 
                             }
-                            if (day.status == "holi_finish"); {
-                                <!-- const data = {year:next?.year,mount:next?.mount,day:day?.number,periodId:current_period}; -->
+                            if (day.status == "holi_finish") {
                                 current_period = "";
                                 await deletePeriod(data);
                             }
@@ -107,11 +106,12 @@ const resaisebleDayStatus = [
         }"
        >
             <tr class="slave_name" v-for="row in table.value?.rows">
-                <slave @click='async () => {
+                <section @click='async () => {
                     if (current_slave === row?.slave.slaveId) {
                         
                     }
-                }
+                }'>
+                </section>
 
                 <section>
                     <a class="slave">{{row.slave.name}}</a>
