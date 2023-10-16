@@ -22,7 +22,11 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      await updateRow();
+      table.rows.map((row) => {
+        if (slaveId = response.data.row.slave.slaveId) {
+          row = response.data.row;
+        }
+      }) 
     }
 
 
@@ -38,7 +42,11 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      await updateRow();
+      row.map((row) => {
+        if (slaveId = response.data.row.slave.slaveId) {
+          row = response.data.row;
+        }
+      }) 
     }
 
     const updatePeriod = async (day) => {
@@ -53,7 +61,11 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      await updateRow();
+      row.map((row) => {
+        if (slaveId = response.data.row.slave.slaveId) {
+          row = response.data.row;
+        }
+      }) 
     }
 
     const updateRow = async (id) => {
