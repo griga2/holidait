@@ -42,7 +42,7 @@ const resaisebleDayStatus = [
               <br class="clear"/></span>
             </div>
           </label>
-      </head> -->
+      </head> -->   
 
     <main>
             
@@ -101,7 +101,7 @@ const resaisebleDayStatus = [
         
         <table id="left_bar"
         :style="{
-            top: (table.value?.rows?.length * 49 * -1) - 28 + 'px',
+            top: (table.value?.rows?.length * 49 * -1) - 24 + 'px',
             left:'0px',
         }"
        >

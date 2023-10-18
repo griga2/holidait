@@ -118,7 +118,7 @@ export const useTableStore = defineStore('table_store', () => {
 
     const addSlave =  async () => {
       const data = {
-        "dangenMasterId":"6515bd540e4a06f8edfffbb9",
+        "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "name":"slave 3"
       }
 
@@ -138,7 +138,7 @@ export const useTableStore = defineStore('table_store', () => {
     const updateTable = async () => {
 
       const data = {
-        "dangenMasterId":"6515bd540e4a06f8edfffbb9",
+        "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "year":2023,
         "mounth":5,
       }
