@@ -23,64 +23,54 @@ export const useTableStore = defineStore('table_store', () => {
       console.log(response.data)
 
       table.rows.map((row) => {
-        if (slaveId = response.data.row.slave.slaveId) {
+        if (row.slave._id === response.data.slave._id) {
           row = response.data.row;
+          console.log("row is update");
         }
       }) 
     }
 
 
-    const createPeriod = async (day) => {
-
+    const createPeriod = async (data) => {
+      console.log(data)
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : day
+        data : data
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      row.map((row) => {
-        if (slaveId = response.data.row.slave.slaveId) {
-          row = response.data.row;
+      table.value.rows.map((row) => {
+        if (row.slave._id === response.data.slave._id) {
+          row = response.data;
+          console.log("row is update");
         }
       }) 
-    }
+    } 
 
-    const updatePeriod = async (day) => {
+    const updatePeriod = async (data) => {
 
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/updatePeriod`,
-        data : day
+        data : data
       };
       
       const response = await axios.request(config);
       console.log(response.data)
 
-      row.map((row) => {
-        if (slaveId = response.data.row.slave.slaveId) {
-          row = response.data.row;
+      table.rows.map((row) => {
+        if (row.slave._id=== response.data.slave._id) {
+          row = response.data;
+          console.log("row is update");
         }
       }) 
     }
 
-    const updateRow = async (id) => {
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `${back_url.value}/row`,
-        data : id
-      };
-
-      const response = await axios.request(config);
-      console.log(response.data)
-
-      await updateRow();
-    }
     
     const deleteSlave = async (id) => {
       let config = {
@@ -93,7 +83,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      await updateTable();
+      table = response.table;
     }
 
     const updateSlave =  async (slave) => {``
@@ -136,7 +126,7 @@ export const useTableStore = defineStore('table_store', () => {
     } 
 
     const updateTable = async () => {
-
+      console.log("updateTable")
       const data = {
         "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "year":2023,
@@ -156,31 +146,10 @@ export const useTableStore = defineStore('table_store', () => {
       table.value = await response.data;  
 
 
-      console.log((table.value?.rows?.length * 49 * -1 ) + 'px')
-      console.log(table.value.rows.length);
+      console.log(response.data);
+      console.log(table.value?.row?.length);
     }
-    
-    const create = async () => {
-
-      const data = {
-        "dangenMasterId":"6515bd540e4a06f8edfffbb9",
-        "year":2023,
-        "mounth":5,
-      }
-
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `${back_url.value}/table`,
-        data : data
-      };
-
-      const response = await axios.request(config);
-      console.log(response.data)
-
-      table.value = response.data;  
-      console.log(table.value);
-    }
+  
 
     return { table,
       current_period,
@@ -189,6 +158,7 @@ export const useTableStore = defineStore('table_store', () => {
       updatePeriod,
       updateTable,
       createPeriod,
+      // updateRow,
       addSlave,
       updateSlave,
       deletePeriod, 

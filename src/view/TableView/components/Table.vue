@@ -57,9 +57,9 @@ const resaisebleDayStatus = [
                     <td class="day" v-for="day of row.old.days">
                         <DayCircle @click='async () => {
                             if (day.type === "empty" && !current_period) {
-                                const data = {year:next?.year,mount:next?.mount,day:day?.number,slaveId:row.slave._id};
-                                current_period = await createPeriod(data);
                                 current_slave = row.slave._id;
+                                const data = {year:table.value.year,mounth:table.value.mouth_old,day:day?.number,slaveId:row.slave._id};
+                                current_period = await createPeriod(data);
                             } 
                             if (day.type === "empty" && current_period && current_slave === row.slave._id) {
                                 current_slave = row.slave._id;
