@@ -7,6 +7,7 @@ import AuthView from './view/AuthView/AuthView.vue'
 
 <template>
     <TableView/>
+    <AuthView/>
 
 
 </template>
