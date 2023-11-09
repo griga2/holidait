@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const useTableStore = defineStore('table_store', () => {
     
-    const table = reactive({});
+    const tables = reactive({});
     const back_url = ref("http://26.212.63.71:3000");
     const current_period = ref('');
     const current_slave = ref('');
@@ -22,7 +22,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      table.rows.map((row) => {
+      tables.rows.map((row) => {
         if (row.slave._id === response.data.slave._id) {
           row = response.data.row;
           console.log("row is update");
@@ -32,7 +32,7 @@ export const useTableStore = defineStore('table_store', () => {
 
 
     const createPeriod = async (data) => {
-      console.log(data)
+      console.log(data, "create prod resp data")
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -41,34 +41,65 @@ export const useTableStore = defineStore('table_store', () => {
       };
 
       const response = await axios.request(config);
-      console.log(response.data)
-
-      table.value.rows.map((row) => {
-        if (row.slave._id === response.data.slave._id) {
-          row = response.data;
-          console.log("row is update");
+      console.log(response.data);
+      tables.value.rez.map(table => {
+        if (table.mounth === data.mounth) {
+          return table.rows.map( row => {
+            if (row.slaveId === data.slaveId) {
+              const el = response.data.rez.rez.filter((el=>{
+                if(el.mounth === data.mounth) {
+                    console.log("up period ");
+                    return el;
+                  }
+                })
+              )
+              console.log(el);
+              row.days = el[0].rows[0].days;
+            }
+            return row  
+          })
+        } else {
+          return table
         }
-      }) 
+      })
+
+      return response.data.periodId
     } 
 
     const updatePeriod = async (data) => {
 
       let config = {
-        method: 'post',
+        method: 'put',
         maxBodyLength: Infinity,
-        url: `${back_url.value}/updatePeriod`,
+        url: `${back_url.value}/period`,
         data : data
       };
       
       const response = await axios.request(config);
       console.log(response.data)
 
-      table.rows.map((row) => {
-        if (row.slave._id=== response.data.slave._id) {
-          row = response.data;
-          console.log("row is update");
+      tables.value.rez.map(table => {
+        if (table.mounth === data.mounth) {
+          return table.rows.map( row => {
+            if (row.slaveId === data.slaveId) {
+              const el = response.data.rez.rez.filter((el=>{
+                if(el.mounth === data.mounth) {
+                    console.log("up period ");
+                    return el;
+                  }
+                })
+              )
+              console.log(el);
+              row.days = el[0].rows[0].days;
+            }
+            return row  
+          })
+        } else {
+          return table
         }
       }) 
+
+      return response.data.periodId;
     }
 
     
@@ -83,7 +114,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      table.value = response.table;
+      tables.value = response.table;
     }
 
     const updateSlave =  async (slave) => {``
@@ -98,7 +129,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      table.value.rows?.map( (row) => {
+      tables.value.rows?.map( (row) => {
         if (row.slave.id == response.data.row.slave.id) {
           row = response.data;
         }
@@ -122,7 +153,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data)
 
-      table.value.rows?.push()
+      tables.value.rows?.push()
     } 
 
     const updateTable = async () => {
@@ -143,15 +174,15 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       // console.log(response.data)
 
-      table.value = await response.data;  
+      tables.value = await response.data;  
 
 
       console.log(response.data);
-      console.log(table.value?.row?.length);
+      console.log(tables.value?.row?.length);
     }
   
 
-    return { table,
+    return { tables,
       current_period,
       current_to_settings,
       current_slave,

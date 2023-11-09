@@ -46,18 +46,23 @@ const props = defineProps({
             </svg>
 
         </article>  
-        <article  v-else-if='status==="holi"'>
+        <article  v-else-if='status==="holiday"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="42" height="42" rx="6" fill="#9AB0FE"/>
             </svg>
         </article>
-        <article  v-else-if='status==="holi_finish"'>
+        <article  v-else-if='status==="holi_start"'
+        style="
+        position: relative;
+        top: -6px;
+        left: -7px;
+        ">
             <svg width="49" height="48" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="41.8542" height="42" rx="6" fill="#FFFEFE"/>
-            <path d="M8.4989 39.6746L40.2496 8.5718C43.4495 5.43719 41.2301 8.28779e-06 36.7507 8.66736e-06L22.6785 9.85981e-06L5 1.13578e-05C2.23858 1.15918e-05 3.50201e-06 2.23859 3.75108e-06 5.00001L6.55634e-06 36.1028C6.95587e-06 40.5325 5.3345 42.7744 8.4989 39.6746Z" fill="#9AB0FE"/>
+            <rect x="7" y="5.99991" width="41.8542" height="42" rx="6" fill="#FFFEFE"/>
+            <path d="M40.5011 8.32547L8.75038 39.4282C5.55047 42.5628 7.76986 48 12.2493 48L26.3215 48L44 48C46.7614 48 49 45.7614 49 43L49 11.8973C49 7.46755 43.6655 5.22565 40.5011 8.32547Z" fill="#9AB0FE"/>
             </svg>
         </article>
-        <article  v-else-if='status==="holi_start"'>
+        <article  v-else-if='status==="holi_finish"'>
             <svg width="49" height="48" viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="41.8542" height="42" rx="6" fill="#FFFEFE"/>
             <path d="M8.4989 39.6746L40.2496 8.5718C43.4495 5.43719 41.2301 8.28779e-06 36.7507 8.66736e-06L22.6785 9.85981e-06L5 1.13578e-05C2.23858 1.15918e-05 3.50201e-06 2.23859 3.75108e-06 5.00001L6.55634e-06 36.1028C6.95587e-06 40.5325 5.3345 42.7744 8.4989 39.6746Z" fill="#9AB0FE"/>
