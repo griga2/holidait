@@ -83,7 +83,7 @@ export const useTableStore = defineStore('table_store', () => {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
               const el = response.data.rez.rez.filter((el=>{
-                if(el.mounth === data.mounth) {
+                if(el.mounth === table.mounth) {
                     console.log("up period ");
                     return el;
                   }
