@@ -6,10 +6,11 @@ const auth = ref(false)
 
 <template>
 
+    <main>
     <section>
 
         <button @click="auth=true">
-            Войти
+            пойти нахуй
         </button>
         
         <button @click="auth=false">
@@ -24,9 +25,9 @@ const auth = ref(false)
             <input type="password"/>
             <a>Востанновить доступ</a>
             <button @click="() => {
-            
+                $router.push('/table')
             }">
-                Войти
+                пойти нахуй
             </button>
         </article>
 
@@ -39,14 +40,29 @@ const auth = ref(false)
             <input type="password"/>
             <a>Востанновить доступ</a>
             <button @click="() => {
-            
+                $router.push('/table')
             }">
                 Зарегестрироваться
             </button>
         </article>
 
     </section>
-
+</main>
 
 </template>
 
+<style scoped>
+
+main{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 0px;
+    font-family: system-ui;
+    color: #a9a9c9;
+    position: absolute;
+    margin: auto;
+}
+</style>

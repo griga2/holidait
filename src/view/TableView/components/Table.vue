@@ -28,6 +28,7 @@
                                             current_slave.value = '';
                                             current_period.value = '';
                                         }
+
                                     
                                         if (day.type === "empty" && !current_period.value) {
                                             console.log('create period');
@@ -128,8 +129,8 @@
                 <tr>
                     <section id="button">
                         <button @click="() => {
-                            addSlave();
-                            updateTable();
+                            store.addSlave();
+                            store.updateTable();
                         }" type="button">Button</button>
                     </section>
                 </tr>
