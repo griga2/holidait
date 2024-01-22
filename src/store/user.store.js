@@ -5,7 +5,7 @@ import axios from 'axios'
 export const useUserStore = defineStore('user_store', () => {
     
     const token = reactive({});
-    const back_url = ref("http://192.168.0.13:3000");
+    const back_url = ref("http://localhost:3000");
     const login = ref('');
     const password = ref('');
 
