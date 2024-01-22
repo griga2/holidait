@@ -14,7 +14,7 @@ const auth = ref(false)
         </button>
         
         <button @click="auth=false">
-            Зарегестироваться
+            Зарегистироваться
         </button>
     </section>
     <section v-if="auth">
@@ -42,7 +42,7 @@ const auth = ref(false)
             <button @click="() => {
                 $router.push('/table')
             }">
-                Зарегестрироваться
+                Зарегистрироваться
             </button>
         </article>
 

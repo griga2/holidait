@@ -5,6 +5,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 
   const routes = [
+    { path }
     { path: '/auth', component: AuthView },
     { path: '/table', component: TableView }
   ]
