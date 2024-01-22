@@ -1,12 +1,12 @@
 import AuthView from "../view/AuthView/AuthView.vue"
 import TableView from "../view/TableView/TableView.vue"
 import {createRouter, createWebHistory} from 'vue-router'
-
+import Authroutes from "../view/AuthView/routes"
 
 
   const routes = [
-    { path }
-    { path: '/auth', component: AuthView },
+    
+    { path: '/auth', component: AuthView, children: Authroutes },
     { path: '/table', component: TableView }
   ]
 
