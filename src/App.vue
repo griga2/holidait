@@ -11,6 +11,7 @@ import AuthView from './view/AuthView/AuthView.vue'
 
 </template>
 
+
 <style scoped>
 
 
