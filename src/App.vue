@@ -18,11 +18,16 @@
 </script>
 
 <template>
+    
     <v-app>
         <RouterView></RouterView>
     </v-app>
 </template>
 
 <style scoped>
+
+*{
+    font-family: 'Evolventa regular';
+}
 
 </style>
