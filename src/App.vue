@@ -19,7 +19,9 @@
 
 <template>
     
-    <v-app>
+    <v-app
+    style="background-color: #D1E3F4;
+    overflow:hidden">
         <RouterView></RouterView>
     </v-app>
 </template>
