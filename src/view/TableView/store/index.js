@@ -5,7 +5,7 @@ import axios from 'axios'
 export const useTableStore = defineStore('table_store', () => {
     
     const tables = reactive({});
-    const back_url = ref("http://26.212.63.71:3000");
+    const back_url = ref("http://localhost:3000");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
@@ -168,7 +168,8 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/table`,
-        data : data
+        data : data,
+        acces_token:""
       };
 
       const response = await axios.request(config);
@@ -178,7 +179,7 @@ export const useTableStore = defineStore('table_store', () => {
 
 
       console.log(response.data);
-      console.log(tables.value?.row?.length);
+      console.log(tables.value?.tables?.length);
     }
   
 
