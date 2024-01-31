@@ -9,7 +9,8 @@ const Authroutes = [
     },
     {
         path:'reg',
-        component: Reg
-    }
+        component: Reg,
+    },
+
 ]
 export default Authroutes 

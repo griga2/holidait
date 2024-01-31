@@ -1,68 +1,72 @@
 <script setup>
+import pinput from "../../../components/pinput.vue";
 
 </script>
 
 <template>
-    <section>
-        <h5 class="vhod">Вход</h5>
+        <main>
+        <section class="block-left" style="position: absolute; top: 0; left: 0;">    
+        <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
+        <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
         <p class="text">Электронная почта или телефон</p>
-        
-        <v-responsive
-        class="baseinput">
-        <v-text-field 
-        label="email@mail.com"
-        type="email"></v-text-field>
-        </v-responsive>
-
+        <pinput/>
         <p class="text">Пароль</p>
-        <v-responsive
-        class="baseinput">
-        <v-text-field
-        type="password"></v-text-field>
-        </v-responsive>
-
-        <p class="font"><v-btn color="#75A3CF" class="button">
-        Войти
-        </v-btn></p>
-        <p class="font">У вас нет аккаунта?<button @click="$router.push('/auth/reg')"><p class="next">Зарегистрироваться</p></button></p>
+        <pinput />
+        <v-btn color="#75A3CF" class="button" style="width: 446px; margin-top: 68px;"> Войти </v-btn>
+        <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
+        <a>У вас нет аккаунта?</a>
+        <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
+        </article>
+        </v-form>
+        
     </section>
+</main>
+    <section class="block-right">
+
+    </section>
+
+    
 </template>
 
-<style>
-.font{
-    font-family: Gilroy;
+<style scoped>
+*{
+    padding:0px;
+    margin:0px;
 }
-.baseinput{
-    border-radius: 2px;
-    border: 1px solid #E53835;
-    background: var(--Red-R50, #FFFAFA);
+
+.block-left{
     display: flex;
-    width: 446px;
-    height: 42px;
-    padding: 0px 12px 0px 10px;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-shrink: 0;
+    width:50%;
+    height:100%;
+}
+.block-right{
+    width: 50%;
+    height:100%;
+
 }
 
 .vhod{
     color: var(--Text-primary---gray700, #313131);
 text-align: center;
-font-family: Gilroy;
+font-family: Gilroy-Light;
 font-size: 22px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
 }
 .text{
+    margin-top: 94px;
+    text-align: left;
     color: var(--Text-primary---gray700, #313131);
-font-family: Gilroy;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 16px; /* 114.286% */
-justify-content: center;
+    font-family: Gilroy-Light;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 114.286% */
 }
+
 .button{
     display: flex;
 width: 446px;

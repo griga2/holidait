@@ -12,7 +12,10 @@ const auth = ref(false)
 </template>
 
 <style scoped>
-
+*{
+    padding:0px;
+    margin:0px;
+}
 main{
     width: 100%;
     height: 100%;
