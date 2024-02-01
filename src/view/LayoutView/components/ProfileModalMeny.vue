@@ -1,10 +1,14 @@
 <script setup>
  import GearSvg from "../../../assets/svg/gear.svg";
  import GoOuth from "../../../assets/svg/go_outh.svg";
+ import { useGlobalStore } from '../../../store/global.store'
+    
+ const globalStore = useGlobalStore()
 
-const {
+ 
+ const {
 
-} = defineProps()
+ } = defineProps()
 
 </script>
 
@@ -17,7 +21,7 @@ const {
             <p>Личные настройки</p>
         </section>
         <section
-        @click="() => {}"       
+        @click="async () => { await globalStore.saveToken(''); $router.push('/auth/auth')}"       
         style="margin-top: 10px;">
             <img :src="GoOuth" alt="my-logo" />
             <p>Выход</p>

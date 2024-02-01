@@ -9,7 +9,7 @@ export const useGlobalStore = defineStore('global_store', () => {
   }
 
   const saveToken = async (token) => {
-    await localStorage.setItem('acces_token');
+    await localStorage.setItem('acces_token', token);
   }
     return { getToken, saveToken}
   })

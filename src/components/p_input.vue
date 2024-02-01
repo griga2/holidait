@@ -1,28 +1,28 @@
 <script setup>
   import { defineProps, defineModel} from 'vue'
+ 
+  const modelValue = defineModel()
 
   const props = defineProps({
     label: {
       type: String,
       default:"",
     },
-    modelValue: {
-      type: String,
-      default: "",
-    },
     type: {
       type: String,
       default:"",
     },
   });
-  const model = defineModel();
+
+
+
+
 </script>
 
 <template>
     <main class="input-wrap">
         <p>{{ label }}</p>
-        <input
-        :type="props.type" style="width: 100%; outline: none;" :model="model"/>
+        <input style="width: 100%; outline: none;" v-model="modelValue"/>
     </main>
 </template>
 
