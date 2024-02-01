@@ -1,37 +1,39 @@
 <script setup>
-const props = defineProps({
-  label: {
-    type: String,
-    default:"",
-  },
-  modelValue: {
-    type: String,
-    default: "",
-  },
-  type: {
-    type: String,
-    default:"",
-  },
+  import { defineProps, defineModel} from 'vue'
 
-});
+  const props = defineProps({
+    label: {
+      type: String,
+      default:"",
+    },
+    modelValue: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      default:"",
+    },
+  });
+  const model = defineModel();
 </script>
 
 <template>
-    <div class="input-wrap">
-      <label>{{ label }}</label>
-      <input :type="props.type" type="text" style="width: 100%;" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"/>
-    </div>
+    <main class="input-wrap">
+        <label>{{ label }}</label>
+        <input :type="props.type" style="width: 100%;" :model="model"/>
+    </main>
 </template>
 
 <style scoped>
 .input-wrap:active{
-    outline: none;
+    outline: none;  
     border: 1px solid var(--prymery, #75A3CF);
     inline-size: none;
-
 }
+
 .input-wrap:hover{
-    outline: none;
+    outline: none;  
     inline-size: none;
     border: 1px solid var(--prymery, #75A3CF);
 }

@@ -1,5 +1,5 @@
 <script setup>
-import pinput from "../../../components/pinput.vue";
+import p_input from "../../../components/p_input.vue";
 
 </script>
 
@@ -9,9 +9,9 @@ import pinput from "../../../components/pinput.vue";
         <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
         <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
         <p class="text">Электронная почта или телефон</p>
-        <pinput/>
+        <p_input/>
         <p class="text">Пароль</p>
-        <pinput />
+        <p_input />
         <v-btn color="#75A3CF" class="button" style="width: 446px; margin-top: 68px;"> Войти </v-btn>
         <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
         <a>У вас нет аккаунта?</a>

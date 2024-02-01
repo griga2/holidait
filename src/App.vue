@@ -20,15 +20,15 @@
 <template>
     
     <v-app
-    style="background-color: #D1E3F4;
-    overflow:hidden">
-        <RouterView></RouterView>
+        style="background-color: #D1E3F4;
+        overflow:hidden">
+            <RouterView></RouterView>
     </v-app>
 </template>
 
 <style scoped>
 
-*{
+* {
     font-family: 'Evolventa regular';
 }
 

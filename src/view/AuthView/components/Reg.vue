@@ -1,5 +1,5 @@
 <script setup>
-import pinput from '../../../components/pinput.vue';
+import p_input from '../../../components/p_input.vue';
 import { ref } from "vue";
 
 const email = ref('email@mail.com')
@@ -13,17 +13,17 @@ const email = ref('email@mail.com')
       <h5 class="reg" style="position: relative; top: 176px;">Регистрация</h5>
       <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
         <p class="text">Ваше ФИО в полной форме</p>
-        <pinput/>
+        <p_input/>
         <p class="text" >Электронная почта</p>
-        <pinput v-model="email"/>
+        <p_input v-model="email"/>
         <p class="text" >Контактный телефон</p>
-        <pinput/>
+        <p_input/>
         <p class="text" >Название компании или ИНН</p>
-        <pinput/>
+        <p_input/>
         <p class="text">Придумайте Пароль</p>
-        <pinput type="password"/>
+        <p_input type="password"/>
         <p class="text" >Подтвердите Пароль</p>
-        <pinput type ="password"/>
+        <p_input type ="password"/>
         <v-btn color="#75A3CF" class="button" style="width: 446px; margin-top: 23px;">Зарегистрироваться</v-btn>
         <article style="display: flex; flex-direction: row; text-align: center; margin: auto;">
           <a class="text">Уже есть аккаунт?</a> 
