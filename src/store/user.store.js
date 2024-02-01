@@ -12,6 +12,6 @@ export const useUserStore = defineStore('user_store', () => {
     const login = ref('');
     const password = ref('');
     const name = ref('Виктор Корнеплод')
-
+    
     return { token, name}
   })

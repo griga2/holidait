@@ -25,7 +25,10 @@
 </template>
 
 <style scoped>
-
+*{
+    background-color: #D1E3F4;
+;
+}
 *{
     font-family: 'Evolventa regular';
 }

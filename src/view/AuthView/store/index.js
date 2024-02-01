@@ -1,7 +1,9 @@
-import { defineStore } from "pinia"
-
-export const authStore = defineStore('auth_store', () => {
-    const Registration = async () => {
+import { defineStore } from "pinia";
+import {ref} from "vue";
+export const useAuthStore = defineStore('auth_store', () => {
+  const login = ref('');
+  const password = ref('');
+  const Registration = async () => {
 
         const data = {
           "dangenMasterId":"6515bd540e4a06f8edfffbb9",
@@ -44,5 +46,5 @@ export const authStore = defineStore('auth_store', () => {
         table.value = response.data;
       }
     
-    return {Registration, Login}
+    return {Registration, Login, login, password}
   })
