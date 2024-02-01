@@ -50,7 +50,6 @@ import p_input from "../../../components/p_input.vue";
 .vhod{
     color: var(--Text-primary---gray700, #313131);
 text-align: center;
-font-family: Gilroy-Light;
 font-size: 22px;
 font-style: normal;
 font-weight: 500;
@@ -60,7 +59,6 @@ line-height: normal;
     margin-top: 94px;
     text-align: left;
     color: var(--Text-primary---gray700, #313131);
-    font-family: Gilroy-Light;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -80,7 +78,6 @@ background: #75A3CF;
 }
 .next{
     color: #75A3CF;
-font-family: Gilroy;
 font-size: 18px;
 font-style: normal;
 font-weight: 500;

@@ -20,12 +20,14 @@
 
 <template>
     <main class="input-wrap">
-        <label>{{ label }}</label>
-        <input :type="props.type" style="width: 100%;" :model="model"/>
+        <p>{{ label }}</p>
+        <input
+        :type="props.type" style="width: 100%; outline: none;" :model="model"/>
     </main>
 </template>
 
 <style scoped>
+
 .input-wrap:active{
     outline: none;  
     border: 1px solid var(--prymery, #75A3CF);
@@ -47,7 +49,7 @@
   border-radius: 2px;
   border: 1px solid var(--Gray-gray150, #75A3CF);
   background: var(--Gray-White, #FFF);
-  outline: none;
+  outline: none;  
 }
 
 </style>

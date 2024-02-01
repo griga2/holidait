@@ -12,7 +12,7 @@
     onMounted(() => {
        if ((store.getToken() != '' && store.getToken())) {
             console.log('hui smotrit na token')
-            // router.push('/auth')
+            router.push('/auth/auth')
        }
     })
 </script>
@@ -26,7 +26,7 @@
     </v-app>
 </template>
 
-<style scoped>
+<style>
 
 * {
     font-family: 'Evolventa regular';

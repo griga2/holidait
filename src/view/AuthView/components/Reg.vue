@@ -59,16 +59,15 @@ const email = ref('email@mail.com')
   margin-top: 5px;
   text-align: left;
   color: var(--Text-primary---gray700, #000000);
-  font-family: Gilroy;
   font-size: 14px;
   font-style: normal;
+  font-family: 'Evolventa regular';
   font-weight: 400;
   line-height: 16px; /* 114.286% */
 }
 .reg{
   color: var(--Text-primary---gray700, #313131);
   text-align: center;
-  font-family: Gilroy;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -77,7 +76,6 @@ const email = ref('email@mail.com')
 }
 .next{
   color: #75A3CF;
-  font-family: Gilroy;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
