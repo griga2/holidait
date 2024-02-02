@@ -59,6 +59,11 @@ console.log(props.width)
 
 <style scoped>
 
+* {
+    font-family: 'Evolventa regular';
+}
+
+
 #arrow{
     position: relative;
     z-index: 3;
@@ -106,7 +111,7 @@ console.log(props.width)
     background: #FFFEFE;
     color: var(--text, #4E7BA7);
     text-align: center;
-    font-family: Evolventa;
+    font-family: 'Evolventa regular';
     font-size: 18px;
     font-style: normal;
     font-weight: 400;

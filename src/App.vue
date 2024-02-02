@@ -10,26 +10,25 @@
     const store = useGlobalStore()
 
     onMounted(() => {
-       if ((store.getToken() != '' && store.getToken())) {
+       if (!store.getToken()) {
             console.log('hui smotrit na token')
-            // router.push('/auth')
+            router.push('/auth/auth')
        }
     })
 </script>
 
 <template>
     
-    <v-app>
-        <RouterView></RouterView>
+    <v-app
+        style="background-color: #D1E3F4;
+        overflow:hidden">
+            <RouterView></RouterView>
     </v-app>
 </template>
 
-<style scoped>
-*{
-    background-color: #D1E3F4;
-;
-}
-*{
+<style>
+
+* {
     font-family: 'Evolventa regular';
 }
 

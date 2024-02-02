@@ -187,7 +187,6 @@
     }
 
     * {
-        font-family: santello;
     }
 
     .mount_row{

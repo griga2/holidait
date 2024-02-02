@@ -1,13 +1,16 @@
 <script setup>
-import pinput from "../../../components/pinput.vue";
+import p_input from "../../../components/p_input.vue";
 import {useAuthStore} from "../store";
 import { storeToRefs } from "pinia";
+import { ref } from 'vue'
 const store = useAuthStore();
 
 const {
         login,
         password,
     } = storeToRefs(store);
+
+const pass = ref('')
 
 </script>
 
@@ -17,14 +20,20 @@ const {
         <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
         <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
         <p class="text">Электронная почта или телефон</p>
-        <pinput 
-        :model-value="login"
+        <p_input 
+        v-model="login"
         />
         <p class="text">Пароль</p>
-        <pinput 
-        :model-value="password"
+        <p_input 
+        v-model="password"
         />
-        <v-btn color="#75A3CF" class="button" style="width: 446px; margin-top: 68px;"> Войти </v-btn>
+        <v-btn color="#75A3CF" class="button" style="width: 100%; margin-top: 68px;"
+            @click="() => {
+                if (store.Login()) {
+                    $router.push('/layout')
+                }
+            }"
+        > Войти </v-btn>
         <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
         <a>У вас нет аккаунта?</a>
         <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
@@ -62,7 +71,6 @@ const {
 .vhod{
     color: var(--Text-primary---gray700, #313131);
 text-align: center;
-font-family: Gilroy-Light;
 font-size: 22px;
 font-style: normal;
 font-weight: 500;
@@ -72,7 +80,6 @@ line-height: normal;
     margin-top: 94px;
     text-align: left;
     color: var(--Text-primary---gray700, #313131);
-    font-family: Gilroy-Light;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -92,7 +99,6 @@ background: #75A3CF;
 }
 .next{
     color: #75A3CF;
-font-family: Gilroy;
 font-size: 18px;
 font-style: normal;
 font-weight: 500;

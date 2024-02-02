@@ -1,8 +1,19 @@
 <script setup>
-import pinput from '../../../components/pinput.vue';
+import p_input from '../../../components/p_input.vue';
 import { ref } from "vue";
+import {useAuthStore} from "../store";
+import { storeToRefs } from "pinia";
+const store = useAuthStore();
 
+const {
+        fio,
+        mail,
+        phone,
+        password,
+    } = storeToRefs(store);
+    
 const email = ref('email@mail.com')
+
 
 </script>
 
@@ -12,18 +23,18 @@ const email = ref('email@mail.com')
         
       <h5 class="reg" style="position: relative; top: 176px;">Регистрация</h5>
       <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
-        <p class="text">Ваше ФИО в полной форме</p>
-        <pinput/>
+        <p class="text" >Ваше ФИО в полной форме</p>
+        <p_input v-model="fio"/>
         <p class="text" >Электронная почта</p>
-        <pinput v-model="email"/>
+        <p_input v-model="mail"/>
         <p class="text" >Контактный телефон</p>
-        <pinput/>
+        <p_input v-model="phone"/>
         <p class="text" >Название компании или ИНН</p>
-        <pinput/>
+        <p_input v-model="password"/>
         <p class="text">Придумайте Пароль</p>
-        <pinput type="password"/>
+        <p_input type="password" v-model="password"/>
         <p class="text" >Подтвердите Пароль</p>
-        <pinput type ="password"/>
+        <p_input type ="password" v-model="password"/>
         <v-btn color="#75A3CF" class="button" style="width: 446px; margin-top: 23px;">Зарегистрироваться</v-btn>
         <article style="display: flex; flex-direction: row; text-align: center; margin: auto;">
           <a class="text">Уже есть аккаунт?</a> 
@@ -59,16 +70,15 @@ const email = ref('email@mail.com')
   margin-top: 5px;
   text-align: left;
   color: var(--Text-primary---gray700, #000000);
-  font-family: Gilroy;
   font-size: 14px;
   font-style: normal;
+  font-family: 'Evolventa regular';
   font-weight: 400;
   line-height: 16px; /* 114.286% */
 }
 .reg{
   color: var(--Text-primary---gray700, #313131);
   text-align: center;
-  font-family: Gilroy;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -77,7 +87,6 @@ const email = ref('email@mail.com')
 }
 .next{
   color: #75A3CF;
-  font-family: Gilroy;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;

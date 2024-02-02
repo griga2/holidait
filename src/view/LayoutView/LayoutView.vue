@@ -3,8 +3,9 @@ import { RouterView } from 'vue-router';
 import { useUserStore } from '../../store/user.store'
 import { storeToRefs } from 'pinia';
 import ProfileModalMeny from './components/ProfileModalMeny.vue'
-import {ref} from 'vue'
+import { ref } from 'vue'
 import p_selectbox from '../../components/p_selectbox.vue'
+import p_input from '../../components/p_input.vue'
 
 
     // access the `store` variable anywhere in the component ✨
@@ -86,6 +87,9 @@ import p_selectbox from '../../components/p_selectbox.vue'
                     value:"hui"
                 }]'
             ></p_selectbox>
+            <p_input
+                v-model="name"
+            ></p_input>
         </v-main>
 </template>
 
