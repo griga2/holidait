@@ -196,7 +196,7 @@ export const useTableStore = defineStore('table_store', () => {
 
 
       console.log(response.data);
-      console.log(tables.value?.row?.length);
+      console.log(tables.value?.tables?.length);
     }
   
 

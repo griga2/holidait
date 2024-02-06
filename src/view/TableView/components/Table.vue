@@ -21,7 +21,6 @@
         "holiday",
         "holi_finish",
     ]
-
     const clickDay = async (table,day,row) => {
 
                                         if (current_slave.value != row.slaveId) {
@@ -189,7 +188,6 @@
     }
 
     * {
-        font-family: santello;
     }
 
     .mount_row{

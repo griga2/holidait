@@ -1,9 +1,11 @@
 import { defineStore } from "pinia"
 import { reactive,ref } from "vue"
-import axios from 'axios'
+import { useGlobalStore } from './global.store'
+
 
 export const useUserStore = defineStore('user_store', () => {
     
+    const store = useGlobalStore()
     const token = reactive({});
     const back_url = ref("http://26.212.63.71:3000");
     const login = ref('');
@@ -52,7 +54,5 @@ export const useUserStore = defineStore('user_store', () => {
         table.value = response.data;
       }
     
-    
-  
-    return { token, Login, Registration}
+    return { token, name}
   })

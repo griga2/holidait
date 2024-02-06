@@ -20,12 +20,12 @@ const props = defineProps({
     /* top: -42px; */
     left: 0px;
     z-index: -1;">
-        <article v-if='status==="empty"'>
+        <article v-if='status=="empty"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="42" height="42" rx="6" fill="#FFFEFE"/>
             </svg>
         </article>
-        <article v-else-if='status==="box_start"'>
+        <article v-else-if='status=="box_start"'>
             <svg width="47" height="49" viewBox="0 0 47 49" fill="none" xmlns="http://www.w3.org/2000/svg" 
             style="position: relative;
             top: -7px;
@@ -34,24 +34,24 @@ const props = defineProps({
             <path d="M38.3916 8.97472L8.11578 40.5389C5.06688 43.7175 7.3197 49 11.7242 49H25.2472H42C44.7614 49 47 46.7614 47 44V12.4358C47 7.93093 41.51 5.7236 38.3916 8.97472Z" fill="#FFE1A8"/>
             </svg>
         </article>
-        <article  v-else-if='status==="box"'>
+        <article  v-else-if='status=="box"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="42" height="42" rx="6" fill="#FFE1A8"/>
             </svg>
         </article>
-        <article  v-else-if='status==="box_holi"'>
+        <article  v-else-if='status=="box_holi"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="41.4264" y="41.9019" width="41.397" height="41.9018" rx="6" transform="rotate(179.989 41.4264 41.9019)" fill="#9AB0FE"/>
             <path d="M8.84145 40.3211L39.8096 8.96313C43.0688 5.66291 40.7589 0.0215841 36.1488 0.0224772L5.17462 0.0284775C2.31676 0.0290312 0.000454279 2.37449 0.00101466 5.26721L0.00708821 36.6191C0.00799218 41.2855 5.58225 43.6213 8.84145 40.3211Z" fill="#FFE1A8"/>
             </svg>
 
         </article>  
-        <article  v-else-if='status==="holiday"'>
+        <article  v-else-if='status=="holiday"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="42" height="42" rx="6" fill="#9AB0FE"/>
             </svg>
         </article>
-        <article  v-else-if='status==="holi_start"'
+        <article  v-else-if='status=="holi_start"'
         style="
         position: relative;
         top: -6px;
