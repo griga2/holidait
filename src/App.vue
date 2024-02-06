@@ -10,10 +10,13 @@
     const store = useGlobalStore()
 
     onMounted(() => {
-       if (!store.getToken()) {
+        console.log('hui smotrit')
+        if (!store.getToken()) {
             console.log('hui smotrit na token')
             router.push('/auth/auth')
-       }
+        } else {
+            router.push('/layout')
+        }   
     })
 </script>
 
