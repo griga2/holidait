@@ -4,7 +4,6 @@
     import DayCircle from '../../../components/dayCircle.vue';
     import { storeToRefs } from 'pinia';
 
-
     // access the `store` variable anywhere in the component ✨
 
     const store = useTableStore()
@@ -22,6 +21,7 @@
         "holiday",
         "holi_finish",
     ]
+
     const clickDay = async (table,day,row) => {
 
                                         if (current_slave.value != row.slaveId) {
@@ -89,7 +89,8 @@
                     class="mount_table">
                         <tr class="mount_row" v-for="row of table.rows">
                                 <td class="day" v-for="day of row.days">
-                                    <DayCircle @click='clickDay(table,day,row)'
+                                    <DayCircle
+                                    @click='clickDay(table,day,row)'
                                     :status="day.type"
                                     :is_dayoff="day.isDayoff"></DayCircle>
                                 </td>
@@ -138,6 +139,8 @@
         </main>
 
     </template>
+
+
 
     <style scoped>
     @import url('../../../assets/style.scrollbar.css');

@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user_store', () => {
         method:'post',
         maxBodyLength: Infinity,
         url:`${back_url.value}/table`,
-        data:data
+        data:data,
       };
 
       const response = await axios.request(config);
