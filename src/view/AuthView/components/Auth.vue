@@ -31,19 +31,22 @@ const pass = ref('')
             @click="() => {
                 if (store.Login()) {
                     $router.push('/layout')
-                }
-            }"
-        > Войти </v-btn>
+                }}"> Войти </v-btn>
         <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
         <a>У вас нет аккаунта?</a>
         <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
         </article>
         </v-form>
-        
-    </section>
+        </section>
+
 </main>
     <section class="block-right">
-
+    <div>
+    <v-img
+    :width="600"
+    aspect-ratio="1"
+    cover
+    src="./../../assets/registration"></v-img></div>
     </section>
 
     

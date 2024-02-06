@@ -3,12 +3,12 @@
 </script>
 
 <template>
-    <div class="background"></div>
+    <body class="background">
     <v-form style="justify-content: center; align-items: center;position: relative; top: 40%;">
         <button color="#75A3CF" class="button"  @click="$router.push('/auth/auth')"> Войти в кабинет </button>
         <button color="#75A3CF" class="button" style="margin-top: 20px;" @click="$router.push('/auth/reg')"> Зарегистрироваться </button>
     </v-form>
-
+    </body>
 </template>
 
 <style scoped>

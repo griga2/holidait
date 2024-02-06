@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth_store', () => {
   const check_password = ref('');
   const password_is_good = ref('');
 
-  const back_url = 'http://localhost:3001'
+  const back_url = 'http://26.212.63.71:3001'
   const Registration = async () => {
 
         const data = {
