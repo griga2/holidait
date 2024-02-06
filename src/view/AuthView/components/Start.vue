@@ -14,10 +14,18 @@
 <style scoped>
 
 .background{
-    background-image: url("./assets/Регистрация.png");
+    background-image: url("../../../assets/png/Регистрация.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    
+    padding: 0px;
+    margin: 0px ;
 }
 .button{
     display: flex;
@@ -34,5 +42,5 @@
     border: 1px solid var(--Gray-gray150, #75A3CF);
     background: var(--Gray-White, #FFF);
     outline: none;
-}
+}   
 </style>
