@@ -19,7 +19,7 @@ const props = defineProps({
     position: relative;
     /* top: -42px; */
     left: 0px;
-    z-index: -1;">
+   ">
         <article v-if='status=="empty"'>
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="42" height="42" rx="6" fill="#FFFEFE"/>
@@ -94,6 +94,8 @@ const props = defineProps({
 article{
     height: 42px;
     width: 42px;
+    z-index:5;
+
 }
 </style>
 

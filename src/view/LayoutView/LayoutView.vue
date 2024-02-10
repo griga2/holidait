@@ -20,7 +20,9 @@ import p_input from '../../components/p_input.vue'
 </script>
 
 <template>
-    
+     <v-app
+         style="background-color: #D1E3F4;
+        overflow:hidden">
         <nav>
             <section>
                 <v-navigation-drawer
@@ -99,6 +101,7 @@ import p_input from '../../components/p_input.vue'
                 v-model="name"
             ></p_input>
         </v-main>
+    </v-app>
 </template>
 
 <style scoped>

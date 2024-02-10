@@ -19,14 +19,16 @@
 </script>
 
 <template>
-    <v-app
-        style="background-color: #D1E3F4;
-        overflow:hidden">
+        <main  
+            style="background-color: #D1E3F4;
+            overflow:hidden">
             <RouterView></RouterView>
-    </v-app>
+        </main>
+
 </template>
 
-<style>
+
+<style scoped>
 
 * {
     font-family: 'Evolventa regular';

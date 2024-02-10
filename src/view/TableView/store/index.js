@@ -16,7 +16,10 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'delete',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : {periodId:periodId}
+        data : {periodId:periodId},
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
 
       const response = await axios.request(config);
@@ -37,7 +40,10 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : data
+        data : data,
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
 
       const response = await axios.request(config);
@@ -72,7 +78,10 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'put',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : data
+        data : data,
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
       
       const response = await axios.request(config);
@@ -123,7 +132,10 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'patch',
         maxBodyLength: Infinity,
         url: `${back_url.value}/slave`,
-        data : slave
+        data : slave,
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
 
       const response = await axios.request(config);
@@ -147,13 +159,16 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/slave`,
-        data : data
+        data : data,
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.value.rows?.push()
+      tables.value.rows?.push();
     } 
 
     const updateTable = async () => {
@@ -161,7 +176,7 @@ export const useTableStore = defineStore('table_store', () => {
       const data = {
         "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "year":2023,
-        "mounth":5,
+        "mounth":5
       }
 
       let config = {
@@ -169,7 +184,9 @@ export const useTableStore = defineStore('table_store', () => {
         maxBodyLength: Infinity,
         url: `${back_url.value}/table`,
         data : data,
-        acces_token:""
+        headers: {
+          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+        }
       };
 
       const response = await axios.request(config);
