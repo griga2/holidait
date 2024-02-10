@@ -39,7 +39,7 @@ import p_input from '../../components/p_input.vue'
                     <v-divider></v-divider>
                     <v-list>
                         <v-list-item link title="Кадры"></v-list-item>
-                        <v-list-item link title="Расписание отпусков"></v-list-item>
+                        <v-list-item link title="Расписание отпусков" @click="$router.push('/table')"></v-list-item>
                         <v-list-item link title="Структура отделов"></v-list-item>
                     </v-list>
                     
