@@ -15,6 +15,8 @@ import p_input from '../../components/p_input.vue'
         name
     } = storeToRefs(store);
 
+    const value = ref({})
+
 </script>
 
 <template>
@@ -84,12 +86,18 @@ import p_input from '../../components/p_input.vue'
             <RouterView></RouterView>
             <p_selectbox
                 :width="350" 
+                :value="value.value"
+                @change_variant="(variant) => {
+                    value.value=variant;
+                }"
+                :title="'Должность'"
                 :variants='[{
                     text:"Разработчик 1С",
                     value:"hui"
                 }]'
             ></p_selectbox>
             <p_input
+                :title="'Должность'"
                 v-model="name"
             ></p_input>
         </v-main>

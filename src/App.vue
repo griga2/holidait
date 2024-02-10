@@ -9,11 +9,14 @@
 
     const store = useGlobalStore()
 
-    onMounted(() => {
-       if (!store.getToken()) {
+    onMounted(async() => {
+        console.log(await store.getToken())
+        if (!(await store.getToken())) {
             console.log('hui smotrit na token')
-            router.push('/auth/auth')
-       }
+            router.push('/auth/start')
+        } else {
+            router.push('/layout')
+        }   
     })
 </script>
 

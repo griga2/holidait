@@ -42,10 +42,9 @@ const pass = ref('')
         
     </section>
 </main>
-    <section class="block-right">
-
+    <section>
+        
     </section>
-
     
 </template>
 
