@@ -18,12 +18,14 @@
 </script>
 
 <template>
-    
-    <v-app
-        style="background-color: #D1E3F4;
-        overflow:hidden">
+    <main  style="background-color: #D1E3F4;
+    overflow:hidden">
+    <!-- <v-app -->
+        <!-- style="background-color: #D1E3F4;
+        overflow:hidden"> -->
             <RouterView></RouterView>
-    </v-app>
+            </main>
+    <!-- </v-app> -->
 </template>
 
 
