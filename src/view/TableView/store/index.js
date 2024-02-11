@@ -26,7 +26,7 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : {periodId:periodId},
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
 
@@ -49,12 +49,14 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : data,
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
 
       const response = await axios.request(config);
-      console.log(response.data);
+
+      console.log(response.data, 'create period');
+
       tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
@@ -76,7 +78,8 @@ export const useTableStore = defineStore('table_store', () => {
         }
       })
 
-      return response.data.periodId
+      
+      return response.data.periodId;
     } 
 
     const updatePeriod = async (data) => {
@@ -87,18 +90,18 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : data,
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
       
       const response = await axios.request(config);
-      console.log(response.data)
+      console.log(response.data.tables)
 
       tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
-              const el = response.data.rez.rez.filter((el=>{
+              const el = response.data?.tables.filter((el=>{
                 if(el.mounth === table.mounth) {
                     console.log("up period ");
                     return el;
@@ -140,7 +143,7 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/slave`,
         data : slave,
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
 
@@ -167,7 +170,7 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/slave`,
         data : data,
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
 
@@ -195,7 +198,7 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/table`,
         data : data,
         headers: {
-          authorization: `Bearer ${token}`
+          authorization: `Bearer ${token.value}`
         }
       };
 
