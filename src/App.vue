@@ -11,7 +11,7 @@
         console.log(await store.getToken(), "token ")
         if ((await store.getToken())) {
             console.log('hui smotrit na token')
-            router.push('/layout')
+            // router.push('/layout')
         } else {
             router.push('/auth/auth')
         }   

@@ -40,9 +40,9 @@ import p_input from '../../components/p_input.vue'
                     </v-list>
                     <v-divider></v-divider>
                     <v-list>
-                        <v-list-item link title="Кадры"></v-list-item>
+                        <v-list-item link title="Кадры" @click="$router.push('/cadrs')"></v-list-item>
                         <v-list-item link title="Расписание отпусков" @click="$router.push('/table')"></v-list-item>
-                        <v-list-item link title="Структура отделов"></v-list-item>
+                        <v-list-item link title="Структура отделов" @click="$router.push('/company_struct')"></v-list-item>
                     </v-list>
                     
 

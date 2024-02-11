@@ -1,15 +1,23 @@
 import { defineStore } from "pinia"
 import { reactive,ref } from "vue"
 import axios from 'axios'
+import {useGlobalStore} from '../../../store/global.store'
 
 export const useTableStore = defineStore('table_store', () => {
     
     const tables = reactive({});
-    const back_url = ref("http://localhost:3001");
+    const back_url = ref("http://localhost:3000");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
+    const token = ref('')
 
+    const globalStore = useGlobalStore();
+
+
+    const getToken = async () => {
+      token.value = await globalStore.getToken();
+    } 
 
     const deletePeriod = async (periodId) => {
       let config = {
@@ -18,21 +26,20 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : {periodId:periodId},
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.rows.map((row) => {
+      tables.tables.map((row) => {
         if (row.slave._id === response.data.slave._id) {
           row = response.data.row;
           console.log("row is update");
         }
       }) 
     }
-
 
     const createPeriod = async (data) => {
       console.log(data, "create prod resp data")
@@ -42,17 +49,17 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : data,
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
 
       const response = await axios.request(config);
       console.log(response.data);
-      tables.value.rez.map(table => {
+      tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
-              const el = response.data.rez.rez.filter((el=>{
+              const el = response.data.tables.filter((el=>{
                 if(el.mounth === data.mounth) {
                     console.log("up period ");
                     return el;
@@ -80,14 +87,14 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/period`,
         data : data,
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
       
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.value.rez.map(table => {
+      tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
@@ -111,7 +118,6 @@ export const useTableStore = defineStore('table_store', () => {
       return response.data.periodId;
     }
 
-    
     const deleteSlave = async (id) => {
       let config = {
         method: 'delete',
@@ -134,14 +140,14 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/slave`,
         data : slave,
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.value.rows?.map( (row) => {
+      tables.value.tables?.map( (row) => {
         if (row.slave.id == response.data.row.slave.id) {
           row = response.data;
         }
@@ -161,7 +167,7 @@ export const useTableStore = defineStore('table_store', () => {
         url: `${back_url.value}/slave`,
         data : data,
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
 
@@ -179,13 +185,17 @@ export const useTableStore = defineStore('table_store', () => {
         "mounth":5
       }
 
+      await getToken();
+
+      console.log(token.value, 'token in get table')
+
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/table`,
         data : data,
         headers: {
-          authorization: 'Beare eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG0xIiwiZW1haWwiOiJkbUBkLm0iLCJpYXQiOjE3MDcxOTM0MDksImV4cCI6MTcwNzE5MzQ2OX0.v79eK6BL7SzczGN28yqkX6armia62GeMYsy_yPpW9uM'
+          authorization: `Bearer ${token}`
         }
       };
 
@@ -198,7 +208,6 @@ export const useTableStore = defineStore('table_store', () => {
       console.log(response.data);
       console.log(tables.value?.tables?.length);
     }
-  
 
     return { tables,
       current_period,

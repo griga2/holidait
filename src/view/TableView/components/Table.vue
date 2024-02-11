@@ -84,7 +84,7 @@
                 <div style='display:grid;
                 grid-template-columns: 1800px 1800px 1800px 1800px 1800px;'>
                     <table
-                    v-for="table in tables.value?.rez"
+                    v-for="table in tables.value?.tables"
                     class="mount_table">
                         <tr class="mount_row" v-for="row of table.rows">
                                 <td class="day" v-for="day of row.days">
