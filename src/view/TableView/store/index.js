@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
 import { reactive,ref } from "vue"
 import axios from 'axios'
+import {useGlobalStore} from '../../../store/global.store'
 
 export const useTableStore = defineStore('table_store', () => {
     
@@ -9,20 +10,30 @@ export const useTableStore = defineStore('table_store', () => {
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
+    const token = ref('')
 
+    const globalStore = useGlobalStore();
+
+
+    const getToken = async () => {
+      token.value = await globalStore.getToken();
+    } 
 
     const deletePeriod = async (periodId) => {
       let config = {
         method: 'delete',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : {periodId:periodId}
+        data : {periodId:periodId},
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.rows.map((row) => {
+      tables.tables.map((row) => {
         if (row.slave._id === response.data.slave._id) {
           row = response.data.row;
           console.log("row is update");
@@ -30,23 +41,27 @@ export const useTableStore = defineStore('table_store', () => {
       }) 
     }
 
-
     const createPeriod = async (data) => {
       console.log(data, "create prod resp data")
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : data
+        data : data,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
 
       const response = await axios.request(config);
-      console.log(response.data);
-      tables.value.rez.map(table => {
+
+      console.log(response.data, 'create period');
+
+      tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
-              const el = response.data.rez.rez.filter((el=>{
+              const el = response.data.tables.filter((el=>{
                 if(el.mounth === data.mounth) {
                     console.log("up period ");
                     return el;
@@ -63,7 +78,8 @@ export const useTableStore = defineStore('table_store', () => {
         }
       })
 
-      return response.data.periodId
+      
+      return response.data.periodId;
     } 
 
     const updatePeriod = async (data) => {
@@ -72,17 +88,20 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'put',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : data
+        data : data,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
       
       const response = await axios.request(config);
-      console.log(response.data)
+      console.log(response.data.tables)
 
-      tables.value.rez.map(table => {
+      tables.value.tables.map(table => {
         if (table.mounth === data.mounth) {
           return table.rows.map( row => {
             if (row.slaveId === data.slaveId) {
-              const el = response.data.rez.rez.filter((el=>{
+              const el = response.data?.tables.filter((el=>{
                 if(el.mounth === table.mounth) {
                     console.log("up period ");
                     return el;
@@ -102,7 +121,6 @@ export const useTableStore = defineStore('table_store', () => {
       return response.data.periodId;
     }
 
-    
     const deleteSlave = async (id) => {
       let config = {
         method: 'delete',
@@ -123,13 +141,16 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'patch',
         maxBodyLength: Infinity,
         url: `${back_url.value}/slave`,
-        data : slave
+        data : slave,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.value.rows?.map( (row) => {
+      tables.value.tables?.map( (row) => {
         if (row.slave.id == response.data.row.slave.id) {
           row = response.data;
         }
@@ -147,13 +168,16 @@ export const useTableStore = defineStore('table_store', () => {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/slave`,
-        data : data
+        data : data,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
 
       const response = await axios.request(config);
       console.log(response.data)
 
-      tables.value.rows?.push()
+      tables.value.rows?.push();
     } 
 
     const updateTable = async () => {
@@ -161,15 +185,21 @@ export const useTableStore = defineStore('table_store', () => {
       const data = {
         "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "year":2023,
-        "mounth":5,
+        "mounth":5
       }
+
+      await getToken();
+
+      console.log(token.value, 'token in get table')
 
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${back_url.value}/table`,
         data : data,
-        acces_token:""
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
       };
 
       const response = await axios.request(config);
@@ -181,7 +211,6 @@ export const useTableStore = defineStore('table_store', () => {
       console.log(response.data);
       console.log(tables.value?.tables?.length);
     }
-  
 
     return { tables,
       current_period,

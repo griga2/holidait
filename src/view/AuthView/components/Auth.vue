@@ -48,7 +48,6 @@ const pass = ref('')
     cover
     src="./../../assets/registration"></v-img></div>
     </section>
-
     
 </template>
 

@@ -15,10 +15,14 @@ import p_input from '../../components/p_input.vue'
         name
     } = storeToRefs(store);
 
+    const value = ref({})
+
 </script>
 
 <template>
-    
+     <v-app
+         style="background-color: #D1E3F4;
+        overflow:hidden">
         <nav>
             <section>
                 <v-navigation-drawer
@@ -36,9 +40,9 @@ import p_input from '../../components/p_input.vue'
                     </v-list>
                     <v-divider></v-divider>
                     <v-list>
-                        <v-list-item link title="Кадры"></v-list-item>
-                        <v-list-item link title="Расписание отпусков"></v-list-item>
-                        <v-list-item link title="Структура отделов"></v-list-item>
+                        <v-list-item link title="Кадры" @click="$router.push('/cadrs')"></v-list-item>
+                        <v-list-item link title="Расписание отпусков" @click="$router.push('/table')"></v-list-item>
+                        <v-list-item link title="Структура отделов" @click="$router.push('/company_struct')"></v-list-item>
                     </v-list>
                     
 
@@ -82,15 +86,22 @@ import p_input from '../../components/p_input.vue'
             <RouterView></RouterView>
             <p_selectbox
                 :width="350" 
+                :value="value.value"
+                @change_variant="(variant) => {
+                    value.value=variant;
+                }"
+                :title="'Должность'"
                 :variants='[{
                     text:"Разработчик 1С",
                     value:"hui"
                 }]'
             ></p_selectbox>
             <p_input
+                :title="'Должность'"
                 v-model="name"
             ></p_input>
         </v-main>
+    </v-app>
 </template>
 
 <style scoped>

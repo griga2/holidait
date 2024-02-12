@@ -5,28 +5,30 @@
 
     const router = useRouter()
 
-    // access the `store` variable anywhere in the component ✨
-
     const store = useGlobalStore()
 
-    onMounted(() => {
-       if (!store.getToken()) {
+    onMounted(async() => {
+        console.log(await store.getToken(), "token ")
+        if ((await store.getToken())) {
             console.log('hui smotrit na token')
+            // router.push('/layout')
+        } else {
             router.push('/auth/auth')
-       }
+        }   
     })
 </script>
 
 <template>
-    
-    <v-app
-        style="background-color: #D1E3F4;
-        overflow:hidden">
+        <main  
+            style="background-color: #D1E3F4;
+            overflow:hidden">
             <RouterView></RouterView>
-    </v-app>
+        </main>
+
 </template>
 
-<style>
+
+<style scoped>
 
 * {
     font-family: 'Evolventa regular';
