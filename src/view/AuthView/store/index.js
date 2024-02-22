@@ -17,7 +17,8 @@ export const useAuthStore = defineStore('auth_store', () => {
   const check_password = ref('');
   const password_is_good = ref('');
 
-  const back_url = 'http://localhost:3000'
+  const back_url = 'http://localhost:3001'
+
   const Registration = async () => {
 
         const data = {
@@ -61,9 +62,12 @@ export const useAuthStore = defineStore('auth_store', () => {
         console.log(response.data)
   
         if ( response.status === 201) {
-          await globalStore.saveToken(response.data.token);
-          console.log(await globalStore.getToken()) 
-          return true;
+          await globalStore.saveToken(response.data.token); 
+          return 201;
+        } else if (response.status == 402) {
+          return 402;
+        } else {
+          return false;
         }
       }
     

@@ -28,9 +28,10 @@ const pass = ref('')
         v-model="password"
         />
         <v-btn color="#75A3CF" class="button" style="width: 100%; margin-top: 68px;"
-            @click="() => {
-                if (store.Login()) {
-                    $router.push('/layout')
+            @click="async () => {
+                console.log(await store.Login());
+                if (await store.Login() == 201) {
+                    $router.push('/layout');
                 }
             }"
         > Войти </v-btn>

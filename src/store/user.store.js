@@ -11,8 +11,6 @@ export const useUserStore = defineStore('user_store', () => {
     const login = ref('');
     const password = ref('');
 
-
-
     const Login = async () => {
 
       const data = {

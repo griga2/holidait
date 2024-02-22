@@ -2,7 +2,8 @@
 
     import { useTableStore } from '../store/index'
     import DayCircle from '../../../components/dayCircle.vue';
-    import { storeToRefs } from 'pinia';
+    import { storeToRefs,  } from 'pinia';
+    import {onMounted} from "vue"
 
     // access the `store` variable anywhere in the component ✨
 
@@ -11,6 +12,7 @@
         tables,
         current_period,
         current_slave,
+        load,
         current_to_settings
     } = storeToRefs(store);
 
@@ -21,6 +23,13 @@
         "holiday",
         "holi_finish",
     ]
+
+    onMounted( async () => {
+        await store.getToken();
+        await store.updateTable();
+    })
+
+    
     const clickDay = async (table,day,row) => {
 
                                         if (current_slave.value != row.slaveId) {
