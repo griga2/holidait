@@ -60,6 +60,7 @@ export const useAuthStore = defineStore('auth_store', () => {
   
         const response = await axios.request(config);
         console.log(response.data)
+        const resp_data = response.data.name;
   
         if ( response.status === 201) {
           await globalStore.saveToken(response.data.token); 

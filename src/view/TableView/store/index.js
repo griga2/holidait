@@ -6,14 +6,13 @@ import {useGlobalStore} from '../../../store/global.store'
 export const useTableStore = defineStore('table_store', () => {
     
     const tables = reactive({});
-    const back_url = ref("http://localhost:3000");
+    const back_url = ref("http://localhost:3001");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
     const token = ref('')
 
     const globalStore = useGlobalStore();
-
 
     const getToken = async () => {
       token.value = await globalStore.getToken();
