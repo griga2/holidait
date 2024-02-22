@@ -15,31 +15,26 @@ const pass = ref('')
 </script>
 
 <template>
-        <main>
-        <section class="block-left" style="position: absolute; top: 0; left: 0;">    
-        <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
-        <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
-        <p class="text">Электронная почта или телефон</p>
-        <p_input 
-        v-model="login"
-        />
-        <p class="text">Пароль</p>
-        <p_input 
-        v-model="password"
-        />
-        <v-btn color="#75A3CF" class="button" style="width: 100%; margin-top: 68px;"
-            @click="() => {
-                if (store.Login()) {
-                    $router.push('/layout')
-                }}"> Войти </v-btn>
-        <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
-        <a>У вас нет аккаунта?</a>
-        <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
-        </article>
-        </v-form>
-        </section>
-
-</main>
+        <main style="position: fixed;">
+            <section class="block-left" style="display: flex; top: 0; left: 0;">    
+                <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
+            <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
+                <p class="text">Электронная почта или телефон</p>
+                <p_input v-model="login"/>
+                <p class="text">Пароль</p>
+                <p_input v-model="password"/>
+                <v-btn color="#75A3CF" class="button" style="width: 100%; margin-top: 68px;"
+                    @click="() => {
+                        if (store.Login()) {
+                            $router.push('/layout')
+                        }}"> Войти </v-btn>
+                <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
+                <a>У вас нет аккаунта?</a>
+                <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
+                </article>
+            </v-form>
+            </section>
+        </main>
     <section class="block-right">
     <div>
     <v-img

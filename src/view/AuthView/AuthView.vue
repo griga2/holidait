@@ -23,7 +23,7 @@ main{
     /* border: 2px solid black; */
     padding: 20px;
     border-radius: 0px;
-    color: #a9a9c9;
+    color: #D1E3F4;
     position: absolute;
     margin: auto;
 }
