@@ -85,9 +85,9 @@
             </label>
         </head> -->   
 
-        <main>
+        <!-- <main> -->
                 
-            <section id="main_table_block"
+            <!-- <section id="main_table_block"
             class = 'c_scroll'>
                 
                 <div style='display:grid;
@@ -144,7 +144,7 @@
                     </section>
                 </tr>
             </table>
-        </main>
+        </main> -->
 
     </template>
 

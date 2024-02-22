@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user_store', () => {
     
     const store = useGlobalStore()
     const token = reactive({});
-    const back_url = ref("http://localhost:3000");
+    const back_url = ref("http://localhost:3001");
     const login = ref('');
     const password = ref('');
 
