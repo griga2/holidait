@@ -30,9 +30,8 @@ onMounted( async () => {
 
 const getTamplates = () => {
     let str = '';
-    console.log(tables.value.value?.tables, 'check');
-    const a = tables.value.value?.tables || [];
-    a.forEach(table => {
+    // console.log(tables.value.value?.tables, 'check');
+    const a =tables.value.value?.tables?.forEach(table => {
         let length = table.rows[1].days.length;
 
         str += `${length * 40}px `
@@ -86,26 +85,44 @@ const clickDay = async (table,day,row) => {
 
 <template>
 
-    <!-- <head>
-        <label>
-            <input type="checkbox" class="alertCheckbox" autocomplete="off" />
-            <div class="alert info">
-            <span class="alertClose">x</span>
-            <span class="alertText">Have a nice day!
-            <br class="clear"/></span>
-            </di        v>
-        </label>
-    </head> -->   
-
-    <main> 
-            
-        <section id="main_table_block"
-        class = 'c_scroll'>
+    <main>    
+        <section id="main_table_block">
             
             <div style='display:grid;'
             :style="{
                 'grid-template-columns': getTamplates()
             }">
+            <table id="left_bar">
+                    <tr class=  "slave_name" v-for="slave in tables.value?.slaves">
+                        <section @click='async () => {
+                            if (current_slave === slave?.id) {
+                                
+                            }
+                        }'>
+                        </section>
+
+                        <section>
+                            <a class="slave">{{slave.name}}</a>
+                        </section>
+                        <section v-if="current_to_settings"
+                        style="
+                            position: sticky;
+                            left:19vh;
+                            height: 49px;
+                            width: calc(100% - 19vh);
+                        ">
+
+                        </section>
+                    </tr>
+                    <tr>
+                        <section id="button">
+                            <button @click="() => {
+                                store.addSlave();
+                                store.updateTable();
+                            }" type="button">Button</button>
+                        </section>
+                    </tr>
+                </table>
                 <table
                 v-for="table in tables.value?.tables"
                 class="mount_table">
@@ -119,47 +136,8 @@ const clickDay = async (table,day,row) => {
                     </tr>
                 </table>
             </div>
-            
         </section>
-        
-        <table id="left_bar"
-        :style="{
-            top: (tables.value?.slaves?.length * 49 * -1) - 14 + 'px',
-            left:'0px',
-        }"
-    >
-            <tr class=  "slave_name" v-for="slave in tables.value?.slaves">
-                <section @click='async () => {
-                    if (current_slave === slave?.id) {
-                        
-                    }
-                }'>
-                </section>
-
-                <section>
-                    <a class="slave">{{slave.name}}</a>
-                </section>
-                <section v-if="current_to_settings"
-                style="
-                    position: sticky;
-                    left:19vh;
-                    height: 49px;
-                    width: calc(100% - 19vh);
-                ">
-
-                </section>
-            </tr>
-            <tr>
-                <section id="button">
-                    <button @click="() => {
-                        store.addSlave();
-                        store.updateTable();
-                    }" type="button">Button</button>
-                </section>
-            </tr>
-        </table>
     </main>
-
 </template>
 
 
@@ -206,8 +184,13 @@ const clickDay = async (table,day,row) => {
     width: 19vh;
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: absolute;
     z-index: 4;
+    top: 40px;
+    left: 0px;
+    background-color: #DCE6EF ;
+    border-radius: 0px 20px 20px 0px;
+    padding-top: 30px;
 }
 
 * {
@@ -221,7 +204,7 @@ const clickDay = async (table,day,row) => {
     position: sticky;
     display: flex;
     width: 100%;
-    height: 47px;
+    height: 40px;
     flex-direction: column;
     background: rgb(183, 178, 198);
     color: black;
@@ -229,7 +212,7 @@ const clickDay = async (table,day,row) => {
     justify-content: center;
     align-content: center;
     text-align: center;
-    margin: 1px;
+    margin-bottom: 4px;
 }
 
 #slave_circle{
@@ -238,15 +221,18 @@ const clickDay = async (table,day,row) => {
 }
 
 .day{
-    height: 46px;
-    width: 46px;
+    height: 40px;
+    width: 40px;
 }   
 
 #main_table_block{
     display: inline-block;
     overflow-x: scroll;
-    position: relative;
     padding-left:19vh;
+    width: calc(100%);
+    /* height: 50vh; */
+    padding-top: 40px;
+    padding-bottom: 60px;
 }
 
 </style>s
