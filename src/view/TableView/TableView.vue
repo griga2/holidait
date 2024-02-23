@@ -11,12 +11,19 @@ const slaeves = [
 </script>
 
 <template>
-    <Table>
+    <main>
+        table
+        <Table>
         
-    </Table>
+        </Table>
+    </main>
+   
 </template>
 
 <style scoped>
 
+main{
+    height: 100vh;
+}
 
 </style>

@@ -28,6 +28,19 @@ onMounted( async () => {
     await store.updateTable();
 })
 
+const getTamplates = () => {
+    let str = '';
+    console.log(tables.value.value?.tables, 'check');
+    const a = tables.value.value?.tables || [];
+    a.forEach(table => {
+        let length = table.rows[1].days.length;
+
+        str += `${length * 40}px `
+    });
+
+    return str;
+}
+
 
 const clickDay = async (table,day,row) => {
 
@@ -227,18 +240,13 @@ const clickDay = async (table,day,row) => {
 .day{
     height: 46px;
     width: 46px;
-}
-
-.mount_table{
-    width: 1600px;
 }   
 
 #main_table_block{
     display: inline-block;
     overflow-x: scroll;
-    width: calc(100% - 190px);
     position: relative;
-    margin-left:19vh;
+    padding-left:19vh;
 }
 
 </style>s
