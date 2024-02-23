@@ -59,11 +59,15 @@ export const useAuthStore = defineStore('auth_store', () => {
   
         const response = await axios.request(config);
         console.log(response.data)
+        const resp_data = response.data.name;
   
         if ( response.status === 201) {
-          await globalStore.saveToken(response.data.token);
-          console.log(await globalStore.getToken()) 
-          return true;
+          await globalStore.saveToken(response.data.token); 
+          return 201;
+        } else if (response.status == 402) {
+          return 402;
+        } else {
+          return false;
         }
       }
     

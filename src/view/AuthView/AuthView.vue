@@ -5,7 +5,7 @@ const auth = ref(false)
 
 <template>
 
-    <main>
+    <main id="auth_main">
         <RouterView></RouterView> 
     </main>
 
@@ -20,11 +20,8 @@ main{
     width: 100%;
     height: 100%;
     text-align: center;
-    /* border: 2px solid black; */
-    padding: 20px;
-    border-radius: 0px;
-    color: #D1E3F4;
-    position: absolute;
+    position: fixed;
     margin: auto;
+    background-color: #D1E3F4;
 }
-</style>
+</style>    
