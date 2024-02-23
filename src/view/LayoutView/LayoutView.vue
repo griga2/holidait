@@ -4,8 +4,6 @@ import { useUserStore } from '../../store/user.store'
 import { storeToRefs } from 'pinia';
 import ProfileModalMeny from './components/ProfileModalMeny.vue'
 import { ref } from 'vue'
-import p_selectbox from '../../components/p_selectbox.vue'
-import p_input from '../../components/p_input.vue'
 
 
     // access the `store` variable anywhere in the component ✨
@@ -31,18 +29,16 @@ import p_input from '../../components/p_input.vue'
                 background-color: #DCE6EF;
                 font-family: 'Evolventa bold';
                 color: #2E4E69;
-                "
-                
-                
-                >
-                    <v-list>
+                ">
+                    <v-list style="font-size: 40px; text-align: center;">
                         Holidator
                     </v-list>
                     <v-divider></v-divider>
                     <v-list>
+                        <v-list-item link title="Главная" @click="$router.push('/main')"></v-list-item>
                         <v-list-item link title="Кадры" @click="$router.push('/cadrs')"></v-list-item>
                         <v-list-item link title="Расписание отпусков" @click="$router.push('/table')"></v-list-item>
-                        <v-list-item link title="Структура отделов" @click="$router.push('/company_struct')"></v-list-item>
+                        <v-list-item link title="Структура отделов" @click="$router.push('/structure')"></v-list-item>
                     </v-list>
                     
 
@@ -84,22 +80,7 @@ import p_input from '../../components/p_input.vue'
 
         <v-main>
             <RouterView></RouterView>
-            <p_selectbox
-                :width="350" 
-                :value="value.value"
-                @change_variant="(variant) => {
-                    value.value=variant;
-                }"
-                :title="'Должность'"
-                :variants='[{
-                    text:"Разработчик 1С",
-                    value:"hui"
-                }]'
-            ></p_selectbox>
-            <p_input
-                :title="'Должность'"
-                v-model="name"
-            ></p_input>
+            
         </v-main>
     </v-app>
 </template>
@@ -125,5 +106,9 @@ import p_input from '../../components/p_input.vue'
     display: flex;
     width: 100%;
     padding-left: 15px;
+} 
+
+*{
+    font-family: Evolventa regular ;
 }
 </style>

@@ -13,8 +13,36 @@ const {
     current_period,
     current_slave,
     load,
-    current_to_settings
+    current_to_settings,
+    loader,
 } = storeToRefs(store);
+
+const convertDayType = (_day_type) => {
+    switch(_day_type) {
+        case 1 : {
+          return "пн";
+          break;  
+        };
+        case 2 : {
+          return "вт"; 
+        };
+        case 3 : {
+          return "ср";
+        };
+        case 4 : {
+          return "чт"; 
+        };
+        case 5 : {
+            return "пт"; 
+        };
+        case 6 : {
+            return "сб";  
+        };
+        case 7 : {
+            return "вс";  
+        };
+    }
+}
 
 store.updateTable();
 
@@ -24,20 +52,59 @@ const resaisebleDayStatus = [
     "holi_finish",
 ]
 
-onMounted( async () => {
-    await store.updateTable();
-})
-
 const getTamplates = () => {
     let str = '';
     // console.log(tables.value.value?.tables, 'check');
     const a =tables.value.value?.tables?.forEach(table => {
         let length = table.rows[1].days.length;
 
-        str += `${length * 40}px `
+        str += `${length * 44}px `
     });
 
     return str;
+}
+
+const convertMounth = (_mouth) => {
+    switch(_mouth) {
+        case 0 : {
+          return "январь";
+          break;  
+        };
+        case 1 : {
+          return "февраль";
+          break;  
+        };
+        case 2 : {
+          return "март"; 
+        };
+        case 3 : {
+          return "апрель";
+        };
+        case 4 : {
+          return "май"; 
+        };
+        case 5 : {
+            return "июнь"; 
+        };
+        case 6 : {
+            return "июль";  
+        };
+        case 7 : {
+            return "август";  
+        };
+        case 8 : {
+          return "сентябрь"; 
+        };
+        case 9 : {
+            return "октябрь"; 
+        };
+        case 10 : {
+            return "ноябрь";  
+        };
+        case 11 : {
+            return "декабрь";  
+        };
+    }
 }
 
 
@@ -79,7 +146,7 @@ const clickDay = async (table,day,row) => {
                                     console.log(current_period.value, "current period id");
                                     console.log(current_slave.value, "current slave id");
                                 }
-// console.log(table);
+
 </script>
     
 
@@ -107,7 +174,7 @@ const clickDay = async (table,day,row) => {
                         <section v-if="current_to_settings"
                         style="
                             position: sticky;
-                            left:19vh;
+                            left: 19vh;
                             height: 49px;
                             width: calc(100% - 19vh);
                         ">
@@ -115,17 +182,29 @@ const clickDay = async (table,day,row) => {
                         </section>
                     </tr>
                     <tr>
-                        <section id="button">
-                            <button @click="() => {
+                        <section id="add_button"
+                            @click="() => {
                                 store.addSlave();
                                 store.updateTable();
-                            }" type="button">Button</button>
+                            }" type="button">
+                            +
                         </section>
                     </tr>
                 </table>
                 <table
                 v-for="table in tables.value?.tables"
                 class="mount_table">
+                    <tr>
+                        <td style="width: 40px; position: relative; height: 40px; white-space: nowrap;"><span>{{ convertMounth(table.mounth) }}</span></td>
+                        <td v-for="day of (table.rows[0].days.length - 4)"></td>
+                        <td style="width: 40px;">{{ convertMounth(table.mounth) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="day_head" v-for="day of table.rows[0].days">
+                                {{ day.number + ", " }}
+                            {{ convertDayType(day.weekDay) }}
+                        </td>
+                    </tr>
                     <tr class="mount_row" v-for="row of table.rows">
                             <td class="day" v-for="day of row.days">
                                 <DayCircle
@@ -151,6 +230,19 @@ const clickDay = async (table,day,row) => {
     font-size: 16px;
 }
 
+.mount_table{
+    border-left: 1px solid black;
+}
+
+.day_head{
+    width: 42px;
+    height: 16px; 
+    text-align: center;
+    font-size: 12px;
+    padding-left: 2px;
+    color: #2E4E69;
+}
+
 #main {
     display: none;
     position: absolute;
@@ -159,6 +251,7 @@ const clickDay = async (table,day,row) => {
     width: 100%;
     height: 100%;
 }
+
 .button {
     background-color: #43499f; 
     border: none;
@@ -169,6 +262,20 @@ const clickDay = async (table,day,row) => {
     display: inline-block;
     font-size: 16px;
 }
+
+#add_button{
+    height: 40px;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 #okno {
     width: 300px;
     height: 300px;
@@ -186,18 +293,14 @@ const clickDay = async (table,day,row) => {
     flex-direction: column;
     position: absolute;
     z-index: 4;
-    top: 40px;
+    top: 98px;
     left: 0px;
     background-color: #DCE6EF ;
     border-radius: 0px 20px 20px 0px;
     padding-top: 30px;
-}
-
-* {
-}
-
-.mount_row{
-
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .slave_name{
@@ -206,7 +309,7 @@ const clickDay = async (table,day,row) => {
     width: 100%;
     height: 40px;
     flex-direction: column;
-    background: rgb(183, 178, 198);
+    background: #FFFFFF;
     color: black;
     z-index: 3;
     justify-content: center;
@@ -217,7 +320,6 @@ const clickDay = async (table,day,row) => {
 
 #slave_circle{
     height: 49px;
-
 }
 
 .day{
@@ -230,7 +332,6 @@ const clickDay = async (table,day,row) => {
     overflow-x: scroll;
     padding-left:19vh;
     width: calc(100%);
-    /* height: 50vh; */
     padding-top: 40px;
     padding-bottom: 60px;
 }

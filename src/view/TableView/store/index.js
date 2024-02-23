@@ -5,13 +5,20 @@ import {useGlobalStore} from '../../../store/global.store'
 
 export const useTableStore = defineStore('table_store', () => {
     
+
+    const dateNow = new Date()
     const tables = reactive({});
     const back_url = ref("http://localhost:3001");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
     const token = ref('')
-
+    const data = reactive({
+      year:dateNow.getFullYear,
+      mounth: dateNow.getMonth() + 1,
+    })
+    const loader = ref(true);
+  
     const globalStore = useGlobalStore();
 
     const getToken = async () => {
@@ -39,6 +46,8 @@ export const useTableStore = defineStore('table_store', () => {
         }
       }) 
     }
+
+    
 
     const createPeriod = async (data) => {
       console.log(data, "create prod resp data")
@@ -218,6 +227,7 @@ export const useTableStore = defineStore('table_store', () => {
       updatePeriod,
       updateTable,
       createPeriod,
+      loader,
       // updateRow,
       addSlave,
       updateSlave,

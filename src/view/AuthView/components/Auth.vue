@@ -15,44 +15,84 @@ const pass = ref('')
 </script>
 
 <template>
-        <main>
-        <section class="block-left" style="position: absolute; top: 0; left: 0;">    
-        <h5 class="vhod" style="position: relative; top: 176px;">Вход</h5>
-        <v-form style="width: 50%; display: flex; flex-direction: column; align-items: start; text-align: start; position: relative; top: 220px;">
-        <p class="text">Электронная почта или телефон</p>
-        <p_input 
-        v-model="login"
-        />
-        <p class="text">Пароль</p>
-        <p_input 
-        v-model="password"
-        />
-        <v-btn color="#75A3CF" class="button" style="width: 100%; margin-top: 68px;"
-            @click="async () => {
-                console.log(await store.Login());
-                if (await store.Login() == 201) {
-                    $router.push('/layout');
-                }
-            }"
-        > Войти </v-btn>
-        <article class="text" style="display: flex; flex-direction: row; text-align: center; margin: auto;">
-        <a>У вас нет аккаунта?</a>
-        <p class="next" @click="$router.push('/auth/reg')"><u>Зарегистрироваться</u></p>
-        </article>
-        </v-form>
-        
-    </section>
-</main>
-    <section>
-        
-    </section>
-    
+    <main>
+
+   
+            <section class="block-left">    
+                <h4 class="vhod" style="position: absolute; top: 20%;">Вход</h4>
+                <form id="vhod_rorm">
+                    <article>
+                        <p class="text">Электронная почта или телефон</p>
+                        <p_input v-model="login"/>
+                    </article>
+                    
+                    <article>
+                        <p class="text">Пароль</p>
+                        <p_input v-model="password"/>
+                    </article>
+                  
+                    <article style="width: 100%; ">
+                        <v-btn color="#75A3CF" class="button"
+                        @click="async () => {
+                            console.log(await store.Login());
+                            if (await store.Login() == 201) {
+                                $router.push('/main');
+                            }
+                        }"> 
+                        Войти
+                        </v-btn>
+                        <article class="button_text">
+                            <span>У вас нет аккаунта?</span>
+                            <span  class="next" @click="$router.push('/auth/reg')">Зарегистрироваться</span>
+                        </article>
+                    </article>
+                </form>
+            </section>
+            <section class="block-right">
+
+            </section>
+
+        </main>
 </template>
 
 <style scoped>
+
+.block-right{
+    -webkit-box-shadow: -11px 2px 20px 8px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -11px 2px 20px 8px rgba(34, 60, 80, 0.2);
+    box-shadow: -11px 2px 20px 8px rgba(34, 60, 80, 0.2);
+}
+
+main{
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.button_text{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center
+}
+
 *{
     padding:0px;
     margin:0px;
+}
+
+#vhod_rorm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    text-align: left;
 }
 
 .block-left{
@@ -60,24 +100,24 @@ const pass = ref('')
     flex-direction: column;
     align-items: center;
     width:50%;
-    height:100%;
+    height:100vh;
+    justify-content: center;
 }
+
 .block-right{
     width: 50%;
     height:100%;
 
 }
-
 .vhod{
     color: var(--Text-primary---gray700, #313131);
-text-align: center;
-font-size: 22px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    text-align: center;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 .text{
-    margin-top: 94px;
     text-align: left;
     color: var(--Text-primary---gray700, #313131);
     font-size: 14px;
@@ -88,20 +128,26 @@ line-height: normal;
 
 .button{
     display: flex;
-width: 446px;
-padding: 0px 22px;
-flex-shrink: 0;
-justify-content: center;
-align-items: center;
-gap: 10px;
-border-radius: 2px;
-background: #75A3CF;
+    width: 100%;
+    padding: 0px 22px;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 2px;
+    background: #75A3CF;
 }
+
 .next{
     color: #75A3CF;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: 150%;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 }
+
+p{
+    width: 100%;
+}
+
 </style>
