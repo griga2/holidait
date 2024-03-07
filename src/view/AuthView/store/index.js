@@ -19,7 +19,8 @@ export const useAuthStore = defineStore('auth_store', () => {
 
   const back_url = 'http://147.45.102.34:3005'
   const Registration = async () => {
-
+  
+    
         const data = {
             "name": fio.value,
             "mail": mail.value,
@@ -60,7 +61,7 @@ export const useAuthStore = defineStore('auth_store', () => {
         const response = await axios.request(config);
         console.log(response.data)
         const resp_data = response.data.name;
-  
+        
         if ( response.status === 201) {
           await globalStore.saveToken(response.data.token); 
           return 201;

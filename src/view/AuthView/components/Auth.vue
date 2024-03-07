@@ -35,15 +35,21 @@ const pass = ref('')
                         <v-btn color="#75A3CF" class="button"
                         
                         @click="async () => {
-                            $swal.fire({title: 'Hello MATHAFAKA',
-                                    position: 'bottom'});
+                            
                             console.log(await store.Login());
                             if (await store.Login() == 201) {
                                 $router.push('/main');
+                                $swal.fire({title: 'Hello MATHAFAKA',
+                                position: 'bottom'});
                             }
-                            if (error.response.status === 401) {
-                                console.log('Failed to login')
-                                router.push('/main')
+                            else if (error.response.status == 401) {
+                                console.log('Failed to login');
+                                router.push('/main');
+                                $swal.fire({title: 'IDI NAHUY MATHAFAKA',
+                                    position: 'bottom'});
+                            }
+                            if (error.response.status === 422){
+                                console.log()
                             }
 
                         }"> 
