@@ -8,7 +8,7 @@ export const useTableStore = defineStore('table_store', () => {
 
     const dateNow = new Date()
     const tables = reactive({});
-    const back_url = ref("http://26.212.63.71:3001");
+    const back_url = ref("http://147.45.102.34:3005");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')

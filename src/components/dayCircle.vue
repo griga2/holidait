@@ -8,6 +8,7 @@ import HolyBox from '../assets/svg/days/holy_box.svg?component'
 import HolyFinish from '../assets/svg/days/holy_finish.svg?component'
 import Holydday from '../assets/svg/days/holyday.svg?component'
 import HolyStart from '../assets/svg/days/start_holy.svg?component'
+
 const props = defineProps({
     status:String,
     error:Boolean,
@@ -60,6 +61,7 @@ const props = defineProps({
             </svg>
         </article>
     </div>
+    
     </main>
 </template>
 
@@ -69,7 +71,4 @@ main{
     position: relative;
 }
 
-
-
 </style>
-//Q78YFBLHJA9

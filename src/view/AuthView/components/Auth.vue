@@ -34,9 +34,14 @@ const pass = ref('')
                     <article style="width: 100%; ">
                         <v-btn color="#75A3CF" class="button"
                         @click="async () => {
-                            console.log(await store.Login());
-                            if (await store.Login() == 201) {
+                            // console.log(await store.Login());
+                            const rez = await store.Login();
+                            if (rez == 201) {
                                 $router.push('/main');
+                            } else if (rez == 401) {
+                                //обработка
+                            } else {
+
                             }
                         }"> 
                         Войти

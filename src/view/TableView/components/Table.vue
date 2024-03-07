@@ -3,8 +3,8 @@
 import { useTableStore } from '../store/index'
 import DayCircle from '../../../components/dayCircle.vue';
 import { storeToRefs,  } from 'pinia';
-import {onMounted} from "vue"
-
+import {onMounted, ref  } from "vue"
+import PeriodModal from "./Modal.vue"
 // access the `store` variable anywhere in the component ✨
 
 const store = useTableStore()
@@ -64,6 +64,13 @@ const getTamplates = () => {
 
     return str;
 }
+
+const click_left = (event, day) => {
+    event.preventDefault();
+    model_day.value = day;
+}
+
+const model_day = ref("");
 
 const convertMounth = (_mouth) => {
     switch(_mouth) {
@@ -209,9 +216,12 @@ const clickDay = async (table,day,row) => {
                     <tr class="mount_row" v-for="row in table?.rows">
                             <td class="day" v-for="day in row?.days">
                                 <DayCircle
+                                @contextmenu="click_left($event, day)"
                                 @click='clickDay(table,day,row)'
                                 :status="day.type"
                                 :is_dayoff="day.isDayoff"></DayCircle>
+                                <PeriodModal v-if="model_day == day" style="position: fixed; z-index: 30;">
+                                </PeriodModal>
                             </td>
                     </tr>
                 </table>
