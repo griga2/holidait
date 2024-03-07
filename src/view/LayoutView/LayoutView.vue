@@ -26,7 +26,7 @@ import { ref } from 'vue'
                 <v-navigation-drawer
                 class="d-flex"
                 style="align-content: space-around;
-                background-color: #DCE6EF;
+                background-color: #D1E3F4;
                 font-family: 'Evolventa bold';
                 color: #2E4E69;
                 ">
