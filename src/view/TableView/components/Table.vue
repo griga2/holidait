@@ -13,6 +13,7 @@ const {
     current_period,
     current_slave,
     load,
+    data_now,
     current_to_settings,
     loader,
 } = storeToRefs(store);
@@ -50,15 +51,15 @@ const resaisebleDayStatus = [
     "holi_start",
     "holiday",
     "holi_finish",
-]
+]       
 
 const getTamplates = () => {
     let str = '';
     // console.log(tables.value.value?.tables, 'check');
     const a =tables.value.value?.tables?.forEach(table => {
-        let length = table.rows[1].days.length;
+        let length = table.rows[0]?.days?.length;
 
-        str += `${length * 44}px `
+        str += `${length * 46 - 10}px `
     });
 
     return str;
@@ -119,12 +120,12 @@ const clickDay = async (table,day,row) => {
                                     if (day.type === "empty" && !current_period.value) {
                                         console.log('create period');
                                         current_slave.value = row.slaveId;
-                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,slaveId:row.slaveId};
+                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth};
                                         current_period.value = await store.createPeriod(data);
                                     } else if (day.type === "empty" && current_period.value && current_slave.value === row.slaveId) {
                                         console.log('update period');
                                         current_slave.value = row.slaveId;
-                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId};
+                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth};
                                         current_period.value = await store.updatePeriod(data);
                                         setTimeout(() => {
                                             current_period.value = '',
@@ -138,7 +139,7 @@ const clickDay = async (table,day,row) => {
                                     {
                                         console.log(day,'update resible period');
                                         current_period.value = day.periodId;
-                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId};
+                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth   };
                                         current_period.value = await store.updatePeriod(data);
                                     }
                                     console.log(day);
@@ -195,18 +196,18 @@ const clickDay = async (table,day,row) => {
                 v-for="table in tables.value?.tables"
                 class="mount_table">
                     <tr>
-                        <td style="width: 40px; position: relative; height: 40px; white-space: nowrap;"><span>{{ convertMounth(table.mounth) }}</span></td>
-                        <td v-for="day of (table.rows[0].days.length - 4)"></td>
-                        <td style="width: 40px;">{{ convertMounth(table.mounth) }}</td>
+                        <td colspan="2" style="width: 40px; position: relative; height: 40px; white-space: nowrap;"><span>{{ convertMounth(table.mounth) }}</span></td>
+                        <td v-for="day in (table.rows[0]?.days?.length > 4 ? table.rows[0]?.days?.length - 4 : 0)"></td>
+                        <td style="width: 40px; position: relative; right: -20px;" colspan="3">{{ convertMounth(table.mounth) }} </td>
                     </tr>
                     <tr>
-                        <td class="day_head" v-for="day of table.rows[0].days">
+                        <td class="day_head" v-for="day in table?.rows[0]?.days || []">
                                 {{ day.number + ", " }}
                             {{ convertDayType(day.weekDay) }}
                         </td>
                     </tr>
-                    <tr class="mount_row" v-for="row of table.rows">
-                            <td class="day" v-for="day of row.days">
+                    <tr class="mount_row" v-for="row in table?.rows">
+                            <td class="day" v-for="day in row?.days">
                                 <DayCircle
                                 @click='clickDay(table,day,row)'
                                 :status="day.type"
@@ -230,9 +231,9 @@ const clickDay = async (table,day,row) => {
     font-size: 16px;
 }
 
-.mount_table{
+/* .mount_table{
     border-left: 1px solid black;
-}
+} */
 
 .day_head{
     width: 42px;
@@ -293,7 +294,7 @@ const clickDay = async (table,day,row) => {
     flex-direction: column;
     position: absolute;
     z-index: 4;
-    top: 98px;
+    top: 140px;
     left: 0px;
     background-color: #DCE6EF ;
     border-radius: 0px 20px 20px 0px;

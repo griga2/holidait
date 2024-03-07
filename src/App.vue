@@ -16,6 +16,7 @@
             router.push('/auth/auth')
         }   
     })
+
 </script>
 
 <template>
@@ -35,3 +36,4 @@
 }
 
 </style>
+    
