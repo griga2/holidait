@@ -74,7 +74,10 @@ const email = ref('email@mail.com')
 form article{
   margin-bottom: 10px;
 }
-
+.button{
+  text-transform: unset !important;
+  
+}
 p{
   margin-bottom: -3px;
   color: #2E4E69;

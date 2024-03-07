@@ -33,11 +33,19 @@ const pass = ref('')
                   
                     <article style="width: 100%; ">
                         <v-btn color="#75A3CF" class="button"
+                        
                         @click="async () => {
+                            $swal.fire({title: 'Hello MATHAFAKA',
+                                    position: 'bottom'});
                             console.log(await store.Login());
                             if (await store.Login() == 201) {
                                 $router.push('/main');
                             }
+                            if (error.response.status === 401) {
+                                console.log('Failed to login')
+                                router.push('/main')
+                            }
+
                         }"> 
                         Войти
                         </v-btn>
@@ -72,7 +80,9 @@ main{
     padding: 0px;
     margin: 0px;
 }
-
+.button{
+    text-transform: unset !important;
+}
 .button_text{
     display: flex;
     flex-direction: row;

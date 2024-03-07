@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth_store', () => {
   const check_password = ref('');
   const password_is_good = ref('');
 
-  const back_url = 'http://26.212.63.71:3001'
+  const back_url = 'http://147.45.102.34:3005'
   const Registration = async () => {
 
         const data = {
@@ -64,12 +64,13 @@ export const useAuthStore = defineStore('auth_store', () => {
         if ( response.status === 201) {
           await globalStore.saveToken(response.data.token); 
           return 201;
-        } else if (response.status == 402) {
-          return 402;
+        } else if (response.status == 401) {
+          return 401;
         } else {
-          return false;
+          return 500;
         }
       }
     
     return {Registration, Login, login, password, fio, mail, company, check_password, password_is_good}
+
   })
