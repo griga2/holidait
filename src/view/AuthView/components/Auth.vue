@@ -43,7 +43,6 @@ const pass = ref('')
                                 position: 'bottom'});
                             } else if (rez == 401) {
                                 console.log('Failed to login');
-                                router.push('/main');
                                 $swal.fire({title: 'IDI NAHUY MATHAFAKA',
                                     position: 'bottom'});
                             } else {
