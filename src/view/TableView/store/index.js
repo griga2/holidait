@@ -13,9 +13,9 @@ export const useTableStore = defineStore('table_store', () => {
     const current_slave = ref('');
     const current_to_settings = ref('')
     const token = ref('')
-    const data = reactive({
-      year:dateNow.getFullYear,
-      mounth: dateNow.getMonth() + 1,
+    const data_now = reactive({
+      year:dateNow.getFullYear(),
+      mounth: dateNow.getMonth(),
     })
     const loader = ref(true);
   
@@ -192,8 +192,8 @@ export const useTableStore = defineStore('table_store', () => {
       console.log("updateTable")
       const data = {
         "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
-        "year":2023,
-        "mounth":5
+        "year":data_now.year,
+        "mounth":data_now.mounth
       }
 
       await getToken();
@@ -229,6 +229,7 @@ export const useTableStore = defineStore('table_store', () => {
       createPeriod,
       loader,
       // updateRow,
+      data_now,
       addSlave,
       updateSlave,
       deletePeriod, 
