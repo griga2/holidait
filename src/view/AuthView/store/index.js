@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('auth_store', () => {
           password:password.value
       }
 
-      console.log(data)
+        console.log(data)
 
   
         let config = {
@@ -57,18 +57,21 @@ export const useAuthStore = defineStore('auth_store', () => {
           url:`${back_url}/auth/login`,
             data:data,
         };
-  
-        const response = await axios.request(config);
-        console.log(response.data)
-        const resp_data = response.data.name;
         
-        if ( response.status === 201) {
-          await globalStore.saveToken(response.data.token); 
-          return 201;
-        } else if (response.status == 401) {
-          return 401;
-        } else {
-          return 500;
+        try {
+          const response = await axios.request(config);
+          console.log(response);
+          // const resp_data = response.data.name;
+          if ( response.status === 201) {
+            await globalStore.saveToken(response.data.token); 
+            return 201;
+          } 
+        } catch (err) {
+          if (err.response.status == 401) {
+            return 401;
+          } else {
+            return 500;
+          }
         }
       }
     

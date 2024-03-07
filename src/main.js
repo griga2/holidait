@@ -19,8 +19,6 @@ const vuetify = createVuetify({
     components,
     directives,
   })
-
-
 app.use(VueClickAway) 
 app.use(router)
 app.use(pinia)
