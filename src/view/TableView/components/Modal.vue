@@ -2,30 +2,29 @@
 import { defineEmits, defineProps } from 'vue';
 
 const emit = defineEmits(["delete","block","go_left","go_right"])
-const props = defineProps(["periodId",""])
 
 </script>
 
 <template>
     <main>
-        <article @click="$emit('block',props.periodId)">
+        <article @click="$emit('block')">
             блок
         </article>
-        <article @click="$emit('delete',props.periodId)">
+        <article @click="$emit('delete')">
             дел
         </article>
-        <article @click="$emit('go_left',props.periodId)">
+        <article @click="$emit('go_left')">
             лув
         </article>
-        <article @click="$emit('go_right',props.periodId)">
+        <article @click="$emit('go_right')">
             прав
         </article>
     </main>
 </template>
 
-<style scoped>
+<style scoped>      
     main{
-        background-color: grey;
+        background-color: #DCE6EF;
         border-radius: 5px;
         display: flex;
         flex-direction: row;

@@ -11,7 +11,7 @@ const {
 
 onMounted( async () => {
     loader.value = true;
-    await store.updateTable();
+    // await store.updateTable();
     loader.value = false;
 })
 
@@ -31,12 +31,14 @@ onMounted( async () => {
                         
                 </article>
             </section>  
-            <section>
-
+            <section style="border-radius: 15px 0px 0px 15px; padding-left: 10px;">
+                <article>
+                    Глоб
+                </article>
             </section>
-        </header>
+        </header>   
         <Table v-if="!loader">
-        
+            
         </Table>
         <section v-else style="width: 100%; height: 30vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <span class="loader"></span>
@@ -55,7 +57,7 @@ header article{
     background-color: #FFFFFF;
     height: 40px;
     width: 40px;
-    margin-right: 6px;
+    margin: 3px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;

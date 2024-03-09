@@ -8,7 +8,8 @@ export const useTableStore = defineStore('table_store', () => {
 
     const dateNow = new Date()
     const tables = reactive({});
-    const back_url = ref("http://147.45.102.34:3005");
+    // const back_url = ref("http://147.45.102.34:3005");
+    const back_url = ref("http://localhost:3005");
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
@@ -25,29 +26,62 @@ export const useTableStore = defineStore('table_store', () => {
       token.value = await globalStore.getToken();
     } 
 
-    const deletePeriod = async (periodId) => {
+    const goTable = async (axes) => {
+      if (axes == 'left') {
+        console.log('left')
+        data_now.mounth = data_now.mounth - 1;
+        data_now.year = data_now.mounth - 1 >= 0 ? data_now.year - 1 : data_now.year;
+      }
+      if (axes == 'right') {
+        console.log('right')
+        data_now.mounth = data_now.mounth + 1;
+        data_now.year = data_now.mounth + 1 >= 11 ? data_now.year + 1 : data_now.year;
+      }
+      console.log(data_now)
+      
+      await updateTable();
+      return false;
+    }
+
+    const deletePeriod = async (data) => {
       let config = {
         method: 'delete',
         maxBodyLength: Infinity,
         url: `${back_url.value}/period`,
-        data : {periodId:periodId},
+        data : {
+          periodId: data.periodId ,
+          slaveId: data.slaveId,
+          update_year: data.update_year,
+          update_mounth: data.update_mounth
+        },
         headers: {
           authorization: `Bearer ${token.value}`
         }
       };
 
       const response = await axios.request(config);
-      console.log(response.data)
+      console.log(data, response)
 
-      tables.tables.map((row) => {
-        if (row.slave._id === response.data.slave._id) {
-          row = response.data.row;
-          console.log("row is update");
-        }
-      }) 
+      updateRow(data, response)
     }
-
     
+    const updateRow = (data, response) => {
+      tables.value.tables.map(table => {
+            return table.rows.map( row => {
+              if (row.slaveId === data.slaveId) {
+                const el = response.data.tables.filter((el=>{
+                  if(el.mounth === table.mounth) {
+                      return el;
+                    } 
+                  })
+                )
+                console.log(el);
+                row.days = el[0].rows[0].days;
+              }
+              return row
+            })
+      })
+    }
 
     const createPeriod = async (data) => {
       console.log(data, "create prod resp data")
@@ -65,28 +99,8 @@ export const useTableStore = defineStore('table_store', () => {
 
       console.log(response.data, 'create period');
 
-      tables.value.tables.map(table => {
-        if (table.mounth === data.mounth) {
-          return table.rows.map( row => {
-            if (row.slaveId === data.slaveId) {
-              const el = response.data.tables.filter((el=>{
-                if(el.mounth === data.mounth) {
-                    console.log("up period ");
-                    return el;
-                  }
-                })
-              )
-              console.log(el);
-              row.days = el[0].rows[0].days;
-            }
-            return row  
-          })
-        } else {
-          return table
-        }
-      })
+      updateRow(data, response)
 
-      
       return response.data.periodId;
     } 
 
@@ -105,26 +119,7 @@ export const useTableStore = defineStore('table_store', () => {
       const response = await axios.request(config);
       console.log(response.data.tables)
 
-      tables.value.tables.map(table => {
-        if (table.mounth === data.mounth) {
-          return table.rows.map( row => {
-            if (row.slaveId === data.slaveId) {
-              const el = response.data?.tables.filter((el=>{
-                if(el.mounth === table.mounth) {
-                    console.log("up period ");
-                    return el;
-                  }
-                })
-              )
-              console.log(el);
-              row.days = el[0].rows[0].days;
-            }
-            return row  
-          })
-        } else {
-          return table
-        }
-      }) 
+      updateRow(data, response)
 
       return response.data.periodId;
     }
@@ -233,6 +228,7 @@ export const useTableStore = defineStore('table_store', () => {
       addSlave,
       updateSlave,
       deletePeriod, 
+      goTable,
       deleteSlave}
   })
 

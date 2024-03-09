@@ -18,6 +18,8 @@ const {
     loader,
 } = storeToRefs(store);
 
+const scroll_main = ref(null)
+
 const convertDayType = (_day_type) => {
     switch(_day_type) {
         case 1 : {
@@ -39,7 +41,7 @@ const convertDayType = (_day_type) => {
         case 6 : {
             return "сб";  
         };
-        case 7 : {
+        case 0 : {
             return "вс";  
         };
     }
@@ -67,7 +69,12 @@ const getTamplates = () => {
 
 const click_left = (event, day) => {
     event.preventDefault();
-    model_day.value = day;
+    console.log(day)
+    if(day.type != 'empty') {
+        model_day.value = day
+    } else {
+        model_day.value=''
+    }
 }
 
 const model_day = ref("");
@@ -115,7 +122,6 @@ const convertMounth = (_mouth) => {
     }
 }
 
-
 const clickDay = async (table,day,row) => {
 
                                     if (current_slave.value != row.slaveId) {
@@ -153,16 +159,77 @@ const clickDay = async (table,day,row) => {
                                     console.log(row);
                                     console.log(current_period.value, "current period id");
                                     console.log(current_slave.value, "current slave id");
-                                }
+}
+
+const goRight  = () => {
+    scroll_main.value.scrollBy(700, 0);
+    checkToUpdate();
+}
+
+
+
+onMounted(() => {
+    scroll_main.value.scrollLeft = 2500;
+    metka_go = true;
+    setTimeout(() => {
+        metka_go = false;
+    }, 5000)
+})
+
+const goLeft  = ( ) => {
+    scroll_main.value.scrollBy(-700,0);
+    checkToUpdate();
+}
+
+let a = "";
+let metka_go = true;
+
+const checkToUpdate = () => {
+    console.log(scroll_main.value.scrollWidth - scroll_main.value.scrollLeft, metka_go)
+    clearTimeout(a);
+    a = setTimeout(async () => {
+        if (scroll_main.value.scrollLeft < 300 && !metka_go) {
+            console.log('go left')
+            metka_go = true;
+            metka_go = await store.goTable('left');
+            metka_go = false;
+
+        } else if (scroll_main.value.scrollWidth - scroll_main.value.scrollLeft < 2000 && !metka_go) {
+            console.log('go right')
+            metka_go = true;
+            metka_go = await store.goTable('right');
+            metka_go = false;
+        }
+    }, 200) 
+}
 
 </script>
     
-
+<!-- v-keyup.left="goLeft()" v-keyup.right="goRight()"   -->
 <template>
-
-    <main>    
-        <section id="main_table_block">
-            
+    <main  >    
+        <section id="main_table_block" @scroll="() => {
+            model_day=null;
+            checkToUpdate();
+        }" ref="scroll_main">
+            <article 
+                @click="goLeft()"
+                class="nav_arraw"
+                style="left: 190px;"
+                :style="{
+                    'margin-top':tables.value?.slaves.length * 42 + 'px'
+                }">
+                лев
+            </article>
+            <article  
+                @click="goRight()"
+                class="nav_arraw"   
+                style="right: 10px;"
+                :style="{
+                    'margin-top':tables.value?.slaves.length * 42 + 'px'
+                }">
+                прав
+            </article>
             <div style='display:grid;'
             :style="{
                 'grid-template-columns': getTamplates()
@@ -216,11 +283,24 @@ const clickDay = async (table,day,row) => {
                     <tr class="mount_row" v-for="row in table?.rows">
                             <td class="day" v-for="day in row?.days">
                                 <DayCircle
+                                
                                 @contextmenu="click_left($event, day)"
                                 @click='clickDay(table,day,row)'
                                 :status="day.type"
                                 :is_dayoff="day.isDayoff"></DayCircle>
-                                <PeriodModal v-if="model_day == day" style="position: fixed; z-index: 30;">
+                                <PeriodModal v-if="model_day == day" style="position: fixed; z-index: 30"
+                                :periodId="day.periodId"
+                                @delete="() => {
+                                    store.deletePeriod({periodId:day.periodId, year:table?.year,mounth:table?.mounth,day:day?.number, slaveId:row.slaveId, update_year:data_now.year, update_mounth: data_now.mounth}); 
+                                    current_period = '';
+                                }"
+                                @block="() => {}"
+                                @go_left="() => {store.goLeftPeriod(day.periodId)}"
+                                @go_right="() => {store.goLeftPeriod(day.periodId)}"
+                                :style="{
+                                    'margin-left': '-' + scroll_main.scrollLeft - 70 + 'px'
+                                }"
+                                v-click-away="() => {model_day = ''}" >
                                 </PeriodModal>
                             </td>
                     </tr>
@@ -340,11 +420,45 @@ const clickDay = async (table,day,row) => {
 
 #main_table_block{
     display: inline-block;
-    overflow-x: scroll;
+    overflow-x: auto;
     padding-left:19vh;
     width: calc(100%);
     padding-top: 40px;
     padding-bottom: 60px;
+    scroll-behavior: smooth;
 }
 
-</style>s
+/* width */
+#main_table_block::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  border-radius: 5px;
+}
+
+/* Track */
+#main_table_block::-webkit-scrollbar-track {
+  background: #C0D2E2;
+  height: 3px;
+  height: 3px;
+  border-radius: 5px;   
+}
+
+/* Handle */
+#main_table_block::-webkit-scrollbar-thumb {
+  background: #DCE6EF;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+#main_table_block::-webkit-scrollbar-thumb:hover {
+  background: #DCE6EF;
+}
+
+.nav_arraw{
+    position: absolute;
+    background-color: #f1f1f1;
+    margin-top: 44px;
+    padding: 5px;
+    z-index: 20;
+}   
+</style>

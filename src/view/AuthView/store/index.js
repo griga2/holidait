@@ -17,7 +17,9 @@ export const useAuthStore = defineStore('auth_store', () => {
   const check_password = ref('');
   const password_is_good = ref('');
 
-  const back_url = 'http://147.45.102.34:3005'
+  // const back_url = 'http://147.45.102.34:3005'
+  const back_url = "http://localhost:3005";
+
   const Registration = async () => {
   
     
@@ -61,7 +63,6 @@ export const useAuthStore = defineStore('auth_store', () => {
         try {
           const response = await axios.request(config);
           console.log(response);
-          // const resp_data = response.data.name;
           if ( response.status === 201) {
             await globalStore.saveToken(response.data.token); 
             return 201;
