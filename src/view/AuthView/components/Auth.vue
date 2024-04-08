@@ -39,7 +39,7 @@ const pass = ref('')
                             const rez = await store.Login();
                             if (rez == 201) {
                                 $router.push('/main');
-                                $swal.fire({title: 'Hello MATHAFAKA',
+                                $swal.fire({title: 'Auth is cool',
                                 position: 'bottom'});
                             } else if (rez == 401) {
                                 console.log('Failed to login');

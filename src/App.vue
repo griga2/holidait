@@ -25,15 +25,34 @@
             overflow:hidden">
             <RouterView></RouterView>
         </main>
-
 </template>
 
 
-<style scoped>
+<style>
 
 * {
     font-family: 'Evolventa regular';
 }
 
+* ::-webkit-scrollbar {
+  width: 10px;
+  background-color: none;
+  opacity: 0px;
+}
+
+/* Track */
+* ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+* ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+* ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 </style>
     
