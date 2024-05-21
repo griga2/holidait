@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth_store', () => {
         let config = {
           method: 'post',
           maxBodyLength: Infinity,
-          url: `${back_url}/auth/reg`,
+          url: `${back_url.value}/auth/reg`,
           data : data,
         };
   
@@ -57,7 +57,7 @@ export const useAuthStore = defineStore('auth_store', () => {
         let config = {
           method:'post',
           maxBodyLength: Infinity,
-          url:`${back_url}/auth/login`,
+          url:`${back_url.value}/auth/login`,
             data:data,
         };
         
