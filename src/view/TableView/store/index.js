@@ -10,7 +10,7 @@ export const useTableStore = defineStore('table_store', () => {
     const tables = reactive({});
     // const back_url = ref("http://147.45.102.34:3005");
     // const back_url = ref("http://localhost:10001");
-    const back_url = ref('http://api.holidator.ru')
+    const back_url = ref('https://api.holidator.ru')
 
     const current_period = ref('');
     const current_slave = ref('');
