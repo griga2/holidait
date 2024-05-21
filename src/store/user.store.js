@@ -8,7 +8,8 @@ export const useUserStore = defineStore('user_store', () => {
     const store = useGlobalStore()
     const token = reactive({});
     // const back_url = ref("http://147.45.102.34:3005");
-    const back_url = ref("http://localhost:3005");
+    // const back_url = ref("http://localhost:10001");
+    const back_url = ref("http://api.holidator.ru");
     const login = ref('');
     const password = ref('');
 
