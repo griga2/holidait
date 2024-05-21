@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth_store', () => {
   const password_is_good = ref('');
 
   // const back_url = 'http://147.45.102.34:3005'
-  const back_url = 'http://api.holidator.ru'
+  const back_url = ref('http://api.holidator.ru')
   // const back_url = "http://localhost:10001";
 
   const Registration = async () => {
