@@ -6,7 +6,8 @@ import { onMounted } from  'vue'
 
 const store = useTableStore()
 const {
-    loader
+    loader,
+    input_mode
 } = storeToRefs(store)
 
 onMounted( async () => {
@@ -24,8 +25,8 @@ onMounted( async () => {
                 <article @click="$router.back()">
                         Н
                 </article>
-                <article>
-                       
+                <article @click="store.changeInputMode()" style="width: 100px;">
+                    {{ input_mode }}
                 </article>
                 <article>
                         
