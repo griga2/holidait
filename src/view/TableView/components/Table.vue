@@ -79,8 +79,8 @@ const click_left = (event, day) => {
 }
 
 const model_day = ref("");
-const holiday_types = ['holy_start'];
-const workday_types = ['full_work'];
+const holiday_types = ['holy_start','holy_finish','holy','box',"box_start",'box_finish'];
+const workday_types = ['work','work_start','work_finish'];
 
 const convertMounth = (_mouth) => {
     switch(_mouth) {
@@ -131,7 +131,7 @@ const clickDay = async (table,day,row) => {
         current_period.value = '';
     }
 
-    if (input_mode.value === 'holyday') {
+    if (input_mode.value === 'holiday') {
                                     if (workday_types.includes(day.type)) {
                                         //notify
                                         return 0
@@ -161,10 +161,10 @@ const clickDay = async (table,day,row) => {
                                         const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth   };
                                         current_period.value = await store.updatePeriod(data);
                                     }
-        } else if (input_mode.value === 'work day') {
+        } else if (input_mode.value === 'work time') {
                                     if (holiday_types.includes(day.type)) {
                                         //notify
-                                        return 0
+                                        return 0;
                                     }
                                     if (day.type === "empty" && !current_period.value) {
                                         console.log('create work day');

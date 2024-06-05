@@ -19,7 +19,8 @@ export const useAuthStore = defineStore('auth_store', () => {
 
   // const back_url = 'http://147.45.102.34:3005'
   // const back_url = ref('https://api.holidator.ru')
-  const back_url = ref("http://localhost:10001");
+  console.log(import.meta.env)
+  const back_url = ref(import.meta.env.VITE_API_ADRES);
 
   const Registration = async () => {
   

@@ -9,7 +9,7 @@ export const useTableStore = defineStore('table_store', () => {
     const dateNow = new Date()
     const tables = reactive({});
     // const back_url = ref("http://147.45.102.34:3005");
-    const back_url = ref("http://localhost:10001");
+    const back_url = ref(import.meta.env.VITE_API_ADRES);
     // const back_url = ref('https://api.holidator.ru')
 
     const current_period = ref('');
