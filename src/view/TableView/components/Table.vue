@@ -14,6 +14,7 @@ const {
     current_slave,
     load,
     data_now,
+    input_mode,
     current_to_settings,
     loader,
 } = storeToRefs(store);
@@ -78,6 +79,8 @@ const click_left = (event, day) => {
 }
 
 const model_day = ref("");
+const holiday_types = ['holy_start'];
+const workday_types = ['full_work'];
 
 const convertMounth = (_mouth) => {
     switch(_mouth) {
@@ -123,13 +126,16 @@ const convertMounth = (_mouth) => {
 }
 
 const clickDay = async (table,day,row) => {
+    if (current_slave.value != row.slaveId) {
+        current_slave.value = '';
+        current_period.value = '';
+    }
 
-                                    if (current_slave.value != row.slaveId) {
-                                        current_slave.value = '';
-                                        current_period.value = '';
+    if (input_mode.value === 'holyday') {
+                                    if (workday_types.includes(day.type)) {
+                                        //notify
+                                        return 0
                                     }
-
-                                
                                     if (day.type === "empty" && !current_period.value) {
                                         console.log('create period');
                                         current_slave.value = row.slaveId;
@@ -155,18 +161,29 @@ const clickDay = async (table,day,row) => {
                                         const data = {year:table?.year,mounth:table?.mounth,day:day?.number,periodId:current_period.value,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth   };
                                         current_period.value = await store.updatePeriod(data);
                                     }
-                                    console.log(day);
-                                    console.log(row);
-                                    console.log(current_period.value, "current period id");
-                                    console.log(current_slave.value, "current slave id");
+        } else if (input_mode.value === 'work day') {
+                                    if (holiday_types.includes(day.type)) {
+                                        //notify
+                                        return 0
+                                    }
+                                    if (day.type === "empty" && !current_period.value) {
+                                        console.log('create work day');
+                                        current_slave.value = row.slaveId;
+                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth};
+                                        current_period.value = await store.CreateWorkDay(data);
+                                    } 
+        }
+
+        console.log(day);
+        console.log(row);
+        console.log(current_period.value, "current period id");
+        console.log(current_slave.value, "current slave id");
 }
 
 const goRight  = () => {
     scroll_main.value.scrollBy(700, 0);
     checkToUpdate();
 }
-
-
 
 onMounted(() => {
     scroll_main.value.scrollLeft = 2500;
@@ -243,9 +260,17 @@ const checkToUpdate = () => {
                         }'>
                         </section>
 
-                        <section>
-                            <a class="slave">{{slave.name}}</a>
-                        </section>
+                        <section class="slave_row">
+                            <article @click="slave.is_changed = !slave.is_changed">
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; top: 3px;">
+                                <path d="M7.92296 7.92308C9.83472 7.92308 11.3845 6.37329 11.3845 4.46154C11.3845 2.54978 9.83472 1 7.92296 1C6.01121 1 4.46143 2.54978 4.46143 4.46154C4.46143 6.37329 6.01121 7.92308 7.92296 7.92308Z" stroke="#2E4E69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.61538 19.4615H1V17.1538C1.01225 15.9812 1.3215 14.8308 1.89888 13.8101C2.47626 12.7894 3.30292 11.9317 4.30165 11.3171C5.30038 10.7025 6.4386 10.3511 7.60997 10.2956C8.78135 10.2402 9.94767 10.4825 11 11" stroke="#2E4E69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21.0001 13.3077L13.754 20.5539L10.4771 21L10.9386 17.7231L18.1694 10.4769L21.0001 13.3077Z" stroke="#2E4E69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </article>
+                            <a style="color: #2E4E69" v-if="!slave.is_changed" class="">{{slave.name}}</a>
+                            <input v-else type="text" v-model="slave.name" @change="() => {store.updateSlave(slave); slave.is_changed = false;}">
+                        </section>  
                         <section v-if="current_to_settings"
                         style="
                             position: sticky;
@@ -313,6 +338,20 @@ const checkToUpdate = () => {
 
 
 <style scoped>
+
+.slave_row{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: start;
+    gap: 5px;
+    align-items: center;
+
+    font-size: 18px;
+    color: #2E4E69;
+    font-weight: 600;
+}
+
 @import url('../../../assets/style.scrollbar.css');
 .alertText {
     display: table;

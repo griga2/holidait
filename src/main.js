@@ -18,7 +18,7 @@ app.use(VueSweetalert2);
 const vuetify = createVuetify({
     components,
     directives,
-  })a
+});
 
 
 app.use(VueClickAway) 

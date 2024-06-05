@@ -17,8 +17,9 @@ export const useAuthStore = defineStore('auth_store', () => {
   const check_password = ref('');
   const password_is_good = ref('');
 
-  const back_url = 'http://147.45.102.34: 3005'
-  // const back_url = "http://localhost:3005";
+  // const back_url = 'http://147.45.102.34:3005'
+  // const back_url = ref('https://api.holidator.ru')
+  const back_url = ref("http://localhost:10001");
 
   const Registration = async () => {
   
@@ -33,7 +34,7 @@ export const useAuthStore = defineStore('auth_store', () => {
         let config = {
           method: 'post',
           maxBodyLength: Infinity,
-          url: `${back_url}/auth/reg`,
+          url: `${back_url.value}/auth/reg`,
           data : data,
         };
   
@@ -56,7 +57,7 @@ export const useAuthStore = defineStore('auth_store', () => {
         let config = {
           method:'post',
           maxBodyLength: Infinity,
-          url:`${back_url}/auth/login`,
+          url:`${back_url.value}/auth/login`,
             data:data,
         };
         

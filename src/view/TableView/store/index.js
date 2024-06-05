@@ -8,12 +8,16 @@ export const useTableStore = defineStore('table_store', () => {
 
     const dateNow = new Date()
     const tables = reactive({});
-    const back_url = ref("http://147.45.102.34:3005");
-    // const back_url = ref("http://localhost:3005");
+    // const back_url = ref("http://147.45.102.34:3005");
+    const back_url = ref("http://localhost:10001");
+    // const back_url = ref('https://api.holidator.ru')
+
     const current_period = ref('');
     const current_slave = ref('');
     const current_to_settings = ref('')
     const token = ref('')
+    const input_mode = ref('holiday')
+    const input_mods = ref(['holiday','work time']);
     const data_now = reactive({
       year:dateNow.getFullYear(),
       mounth: dateNow.getMonth(),
@@ -25,6 +29,11 @@ export const useTableStore = defineStore('table_store', () => {
     const getToken = async () => {
       token.value = await globalStore.getToken();
     } 
+
+    const changeInputMode = () => {
+      let index = input_mods.value.indexOf(input_mode.value)
+      input_mode.value = input_mods.value[index + 1 < input_mods.value.length ? index + 1 : 0];
+    }
 
     const goTable = async (axes) => {
       if (axes == 'left') {
@@ -41,6 +50,27 @@ export const useTableStore = defineStore('table_store', () => {
       
       await updateTable();
       return false;
+    }
+
+    const CreateWorkDay = async (data) => {
+      console.log(data, "create prod resp data")
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/workday`,
+        data : data,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
+      };
+
+      const response = await axios.request(config);
+
+      console.log(response.data, 'create period');
+
+      updateRow(data, response)
+
+      return response.data.periodId;
     }
 
     const deletePeriod = async (data) => {
@@ -138,13 +168,14 @@ export const useTableStore = defineStore('table_store', () => {
       tables.value = response.table;
     }
 
-    const updateSlave =  async (slave) => {``
-
+    const updateSlave =  async (slave) => {
+      console.log( {slave : slave});
+      console.log(slave);
       let config = {
-        method: 'patch',
+        method: 'put',
         maxBodyLength: Infinity,
         url: `${back_url.value}/slave`,
-        data : slave,
+        data : {slave : slave},
         headers: {
           authorization: `Bearer ${token.value}`
         }
@@ -152,13 +183,6 @@ export const useTableStore = defineStore('table_store', () => {
 
       const response = await axios.request(config);
       console.log(response.data)
-
-      tables.value.tables?.map( (row) => {
-        if (row.slave.id == response.data.row.slave.id) {
-          row = response.data;
-        }
-        }
-      )
     }
 
     const addSlave =  async () => {
@@ -166,6 +190,8 @@ export const useTableStore = defineStore('table_store', () => {
         "dangenMasterId":"652ed059c5d1200b6f3b2ab5",
         "name":"slave 3"
       }
+
+      console.log(back_url.value);
 
       let config = {
         method: 'post',
@@ -209,21 +235,26 @@ export const useTableStore = defineStore('table_store', () => {
       // console.log(response.data)
 
       tables.value = await response.data;  
-
-
-      console.log(response.data);
-      console.log(tables.value?.tables?.length);
-    }
+      tables.value.tables.slaves.map((el) => {
+        return {
+          id: el.id,
+          name: el.name,
+          is_changed: false
+        }
+      })
+    } 
 
     return { tables,
       current_period,
       current_to_settings,
       current_slave,
       updatePeriod,
+      changeInputMode,
       updateTable,
       createPeriod,
       loader,
-      // updateRow,
+      input_mode,
+      CreateWorkDay,
       data_now,
       addSlave,
       updateSlave,
