@@ -308,24 +308,53 @@ const checkToUpdate = () => {
                     <tr class="mount_row" v-for="row in table?.rows">
                             <td class="day" v-for="day in row?.days">
                                 <DayCircle
-                                
                                 @contextmenu="click_left($event, day)"
                                 @click='clickDay(table,day,row)'
                                 :status="day.type"
                                 :is_dayoff="day.isDayoff"></DayCircle>
                                 <PeriodModal v-if="model_day == day" style="position: fixed; z-index: 30"
                                 :periodId="day.periodId"
-                                @delete="() => {
-                                    store.deletePeriod({periodId:day.periodId, year:table?.year,mounth:table?.mounth,day:day?.number, slaveId:row.slaveId, update_year:data_now.year, update_mounth: data_now.mounth}); 
-                                    current_period = '';
-                                }"
-                                @block="() => {}"
-                                @go_left="() => {store.goLeftPeriod(day.periodId)}"
-                                @go_right="() => {store.goLeftPeriod(day.periodId)}"
                                 :style="{
                                     'margin-left': '-' + scroll_main.scrollLeft - 70 + 'px'
                                 }"
                                 v-click-away="() => {model_day = ''}" >
+                                <template v-slot:header>
+
+                                </template>
+                                <template v-slot:br_row>
+                                    <article 
+                                    v-if="holiday_types.includes(day.type)"
+                                    class="bt_modal"
+                                    @click="$emit('block')">
+                                        блок
+                                    </article>
+                                    <article
+                                    v-if="workday_types.includes(day.type)"
+                                    class="bt_modal"
+                                    @click="$emit('block')">
+                                        коп
+                                    </article>
+                                    <article
+                                    class="bt_modal"
+                                    @click="() => {
+                                        store.deletePeriod({periodId:day.periodId, year:table?.year,mounth:table?.mounth,day:day?.number, slaveId:row.slaveId, update_year:data_now.year, update_mounth: data_now.mounth}); 
+                                        current_period = '';
+                                    }">
+                                        дел
+                                    </article>
+                                    <article 
+                                    v-if="holiday_types.includes(day.type)"
+                                    class="bt_modal"
+                                    @click="() => {store.goLeftPeriod(day.periodId)}">
+                                        лeв
+                                    </article>
+                                    <article
+                                    v-if="holiday_types.includes(day.type)"
+                                    class="bt_modal"    
+                                    @click="() => {store.goLeftPeriod(day.periodId)}">
+                                        прав
+                                    </article>
+                                </template>
                                 </PeriodModal>
                             </td>
                     </tr>
@@ -350,6 +379,18 @@ const checkToUpdate = () => {
     font-size: 18px;
     color: #2E4E69;
     font-weight: 600;
+}
+
+.bt_modal{
+        background-color: #FFFFFF;
+        height: 40px;
+        width: 40px;
+        border-radius: 5px;
+        margin: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 }
 
 @import url('../../../assets/style.scrollbar.css');
