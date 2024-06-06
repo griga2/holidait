@@ -57,7 +57,7 @@ export const useTableStore = defineStore('table_store', () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${back_url.value}/workday`,
+        url: `${back_url.value}/shift`,
         data : data,
         headers: {
           authorization: `Bearer ${token.value}`
@@ -68,7 +68,7 @@ export const useTableStore = defineStore('table_store', () => {
 
       console.log(response.data, 'create period');
 
-      updateRow(data, response)
+      await updateRow(data, response);
 
       return response.data.periodId;
     }
