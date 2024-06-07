@@ -79,8 +79,8 @@ const click_left = (event, day) => {
 }
 
 const model_day = ref("");
-const holiday_types = ['holy_start','holy_finish','holy','box',"box_start",'box_finish'];
-const workday_types = ['work','work_start','work_finish'];
+const holiday_types = ['holi_start','holi_finish','holiday','box',"box_start",'box_finish'];
+const workday_types = ['shift','shift_start','shift_finish'];
 
 const convertMounth = (_mouth) => {
     switch(_mouth) {
@@ -321,8 +321,8 @@ const checkToUpdate = () => {
                                 <template v-slot:header>
 
                                 </template>
-                                <template v-slot:br_row>
-                                    <article 
+                                <template v-slot:bt_row>
+                                    <article    
                                     v-if="holiday_types.includes(day.type)"
                                     class="bt_modal"
                                     @click="$emit('block')">
@@ -335,6 +335,7 @@ const checkToUpdate = () => {
                                         коп
                                     </article>
                                     <article
+                                    v-if='workday_types.includes(day.type)'
                                     class="bt_modal"
                                     @click="() => {
                                         store.deletePeriod({periodId:day.periodId, year:table?.year,mounth:table?.mounth,day:day?.number, slaveId:row.slaveId, update_year:data_now.year, update_mounth: data_now.mounth}); 

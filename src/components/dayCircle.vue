@@ -8,6 +8,9 @@ import HolyBox from '../assets/svg/days/holy_box.svg?component'
 import HolyFinish from '../assets/svg/days/holy_finish.svg?component'
 import Holydday from '../assets/svg/days/holyday.svg?component'
 import HolyStart from '../assets/svg/days/start_holy.svg?component'
+import ShiftStart from '../assets/svg/days/shift_start.svg?component'
+import Shift from '../assets/svg/days/shift.svg?component'
+import ShiftFinish from '../assets/svg/days/shift_finish.svg?component'
 
 const props = defineProps({
     status:String,
@@ -47,6 +50,15 @@ const props = defineProps({
         </article>
         <article v-else-if="status === 'box_finish'">
             <BoxFinish></BoxFinish>
+        </article>
+        <article v-else-if="status === 'shift'">
+            <Shift></Shift>
+        </article>
+        <article v-else-if="status === 'shift_start'">
+            <ShiftStart></ShiftStart>
+        </article>
+        <article v-else-if="status === 'shift_finish'">
+            <ShiftFinish></ShiftFinish>
         </article>
     </div>
     <div style="

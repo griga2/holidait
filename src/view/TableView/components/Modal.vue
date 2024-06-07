@@ -1,8 +1,4 @@
 <script setup>
-import { defineEmits, defineProps } from 'vue';
-
-const props = defineProps(['item_type','item_id'])
-const emit = defineEmits(["delete","block","go_left","go_right"])
 
 </script>
 
@@ -20,11 +16,11 @@ const emit = defineEmits(["delete","block","go_left","go_right"])
         <slot name="botton">
 
         </slot>
-    </main>
+    </main>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 </template>
 
 <style scoped>      
-    main > slot[name=bt_row]{
+    main {
         background-color: #DCE6EF;
         border-radius: 5px;
         display: flex;
@@ -32,6 +28,8 @@ const emit = defineEmits(["delete","block","go_left","go_right"])
         align-items: center;
         padding: 2px;
         justify-content: center;
-    }
+        min-width: 100px;
+        min-height: 32px; 
+    }                                                                                           
 
 </style>
