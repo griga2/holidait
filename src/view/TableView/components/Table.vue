@@ -221,17 +221,16 @@ const checkToUpdate = () => {
 }
 
 const start_time = ref({
-  hours: new Date().getHours(),
-  minutes: new Date().getMinutes()
+  hours: 8,
+  minutes: 0
 })
 const finish_time = ref({
-  hours: new Date().getHours(),
-  minutes: new Date().getMinutes()
+  hours: 21,
+  minutes: 0
 })
 
 </script>
-    
-<!-- v-keyup.left="goLeft()" v-keyup.right="goRight()"   -->
+
 <template>
     <main  >    
         <section id="main_table_block" @scroll="() => {
@@ -328,13 +327,25 @@ const finish_time = ref({
                                 }"
                                 v-click-away="() => {model_day = ''}" >
                                 <template v-slot:header>
+                                    <span>Время смены</span>
                                     <section style="display: flex; flex-derection: row">
-                                        <VueDatePicker v-model="start_time" time-picker></VueDatePicker>
-                                        <VueDatePicker v-model="finish_time" time-picker></VueDatePicker>
+                                        <VueDatePicker
+                                            style="width: 110px;" 
+                                            v-model="start_time"
+                                            time-picker
+                                            placeholder="Select Time"
+                                        ></VueDatePicker>
+                                        <VueDatePicker 
+                                            style="width: 110px;" 
+                                            v-model="finish_time"
+                                            time-picker
+                                            placeholder="Select Time"
+                                        ></VueDatePicker>
                                     </section>
                                 </template>
-                                <template v-slot:bt_row>y
-                                    
+                                <template v-slot:bt_row>
+                                    <section style="display: flex; flex-direction: row; width: 100%">
+
                                     <article    
                                     v-if="holiday_types.includes(day.type)"
                                     class="bt_modal">
@@ -365,6 +376,13 @@ const finish_time = ref({
                                     @click="() => {store.goLeftPeriod(day.periodId)}">
                                         прав
                                     </article>
+                                    <article
+                                    v-if="holiday_types.includes(day.type)"
+                                    class="bt_modal"    
+                                    @click="() => {store.goLeftPeriod(day.periodId)}">
+                                        смена на выезде
+                                    </article>
+                                    </section>
                                 </template>
                                 </PeriodModal>
                             </td>

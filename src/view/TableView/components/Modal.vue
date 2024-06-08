@@ -25,6 +25,12 @@
         width: 100% ;
     }
 
+    slot [name=header] {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
     main {
         background-color: #DCE6EF;
         border-radius: 5px;
@@ -32,7 +38,7 @@
         flex-direction: column;
         align-items: center;
         padding: 2px;
-        justify-content: center;
+        justify-content: start;
         min-width: 100px;
         min-height: 32px; 
     }                                                                                           
