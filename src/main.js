@@ -10,6 +10,8 @@ import * as directives from 'vuetify/directives'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import VueClickAway from "vue3-click-away";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const pinia = createPinia();
 
@@ -19,7 +21,7 @@ const vuetify = createVuetify({
     components,
     directives,
 });
-
+app.component('VueDatePicker', VueDatePicker);
 
 app.use(VueClickAway) 
 app.use(router)

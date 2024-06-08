@@ -65,7 +65,7 @@ export default defineComponent({
 
 <template>
   <section class="table">
-    <table>
+    <table style="height: 100%">
       <thead>
         <tr>
           <th
@@ -79,12 +79,10 @@ export default defineComponent({
           </th>
         </tr>
       </thead>
-
       <tbody>
         <tr v-if="items.length === 0">
           <td class="empty-table-text" :colspan="fields.length">{{ empty_table_text }}</td>
         </tr>
-
         <tr
           v-else
           v-for="(tr, tr_index) of items"
@@ -111,6 +109,9 @@ export default defineComponent({
             <slot name="bottom_row"></slot>
           </td>
         </tr>
+        <tr style="height: 100%">
+          
+        </tr>
       </tbody>
     </table>
   </section>
@@ -125,8 +126,12 @@ export default defineComponent({
   overflow: scroll;
   border: 1px solid #ccc;
   border-radius: 10px;
+  height: 100%;
 }
 
+tr{
+  max-height: 62px;
+}
 .empty-table-text {
   text-align: center;
   border-bottom: none;
@@ -139,20 +144,16 @@ export default defineComponent({
 
 table {
   border-spacing: 0;
-  // border: 1px solid #ccc;
-  // border-radius: 10px;
+  height: 100%;
 }
 
 th {
   border: 0.5px solid #ccc;
   padding: 8px;
-  // width: 50px;
-  // min-width: 50px;
   height: 50px;
   min-height: 50px;
   position: sticky;
   top: 0px;
-  // background-color: var(--gray-100, #f3f4f6);
   background-color: #fff;
 
   color: var(--gray-500, #6b7280);

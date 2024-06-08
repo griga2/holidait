@@ -23,7 +23,6 @@ onMounted( async () => {
         <header>
             <section style="border-radius: 0px 15px 15px 0px; padding-left: 10px;">
                 <article @click="$router.back()">
-                        Н
                 </article>
                 <article @click="store.changeInputMode()" style="width: 100px;">
                     {{ input_mode }}

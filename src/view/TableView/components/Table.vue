@@ -220,6 +220,15 @@ const checkToUpdate = () => {
     }, 200) 
 }
 
+const start_time = ref({
+  hours: new Date().getHours(),
+  minutes: new Date().getMinutes()
+})
+const finish_time = ref({
+  hours: new Date().getHours(),
+  minutes: new Date().getMinutes()
+})
+
 </script>
     
 <!-- v-keyup.left="goLeft()" v-keyup.right="goRight()"   -->
@@ -238,7 +247,7 @@ const checkToUpdate = () => {
                 }">
                 лев
             </article>
-            <article  
+            <article
                 @click="goRight()"
                 class="nav_arraw"   
                 style="right: 10px;"
@@ -319,23 +328,24 @@ const checkToUpdate = () => {
                                 }"
                                 v-click-away="() => {model_day = ''}" >
                                 <template v-slot:header>
-
+                                    <section style="display: flex; flex-derection: row">
+                                        <VueDatePicker v-model="start_time" time-picker></VueDatePicker>
+                                        <VueDatePicker v-model="finish_time" time-picker></VueDatePicker>
+                                    </section>
                                 </template>
-                                <template v-slot:bt_row>
+                                <template v-slot:bt_row>y
+                                    
                                     <article    
                                     v-if="holiday_types.includes(day.type)"
-                                    class="bt_modal"
-                                    @click="$emit('block')">
+                                    class="bt_modal">
                                         блок
                                     </article>
                                     <article
                                     v-if="workday_types.includes(day.type)"
-                                    class="bt_modal"
-                                    @click="$emit('block')">
+                                    class="bt_modal">
                                         коп
                                     </article>
                                     <article
-                                    v-if='workday_types.includes(day.type)'
                                     class="bt_modal"
                                     @click="() => {
                                         store.deletePeriod({periodId:day.periodId, year:table?.year,mounth:table?.mounth,day:day?.number, slaveId:row.slaveId, update_year:data_now.year, update_mounth: data_now.mounth}); 
@@ -394,7 +404,7 @@ const checkToUpdate = () => {
         justify-content: center;
 }
 
-@import url('../../../assets/style.scrollbar.css');
+/* import url('../../../assets/style.scrollbar.css'); */
 .alertText {
     display: table;
     margin: auto;
@@ -457,6 +467,10 @@ const checkToUpdate = () => {
     color: #a9a9c9;
     position: absolute;
     margin: auto;
+}
+
+.data_picker{
+    width: 150px;
 }
 
 #left_bar{

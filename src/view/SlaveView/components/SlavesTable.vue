@@ -14,7 +14,6 @@
     key: 'name',
     checked: true,
     label: 'Имя',
-    // sortable: true,
     width: 100
   },
   {
@@ -47,44 +46,12 @@
             </div>
             </template>
 
-            <template #body_client="{ item }">
-            <article>{{ item?.client?.name }}</article>
+            <template #body_name="{item}">
+              <span>{{item.name}}</span>
             </template>
 
-            <template #body_priority="{ item }">
-            <article>{{ item?.priority?.name }}</article>
-            </template>
-
-            <template #body_date_close="{ item }">
-            <div>{{ convertDate(item?.completed_date) }}</div>
-            </template>
-
-            <template #body_plan_date="{ item }">
-            <div>{{ convertDate(item?.plan_date) }}</div>
-            </template>
-
-            <template #body_date_register="{ item }">
-            <div>{{ convertDate(item?.created_at) }}</div>
-            </template>
-
-            <template #body_responsible="{ item }">
-            <div>{{ ((item.Engineer?.first_name || "Ответвенный не назначен" ) + (item.Engineer?.second_name  || '') +  (item.Engineer?.last_name  || ''))}}</div>
-            </template>
-
-            <template #body_status="{ item }">
-            <div>{{ item.status?.name }}</div>
-            </template>
-
-            <template #body_type="{ item }">
-            <span>{{ item?.type?.name }}</span>
-            </template>
-
-            <template #body_date_period="{ item }">
-            <div>{{ `${convertDate(item.begin)} - ${convertDate(item.end)}` }}</div>
-            </template>
-
-            <template #body_region="{ item }">
-            {{ item.region }}
+            <template #body_role="{item}">
+              <span>{{item.role}}</span>
             </template>
         </ResizableTable>
     </main>
@@ -166,9 +133,12 @@
 
 main{
     margin-top: 0px;
+    padding: 22px;
+    height: calc(100% - 22px - 100px);
 }
 
+
 header{
-    height: 100px;
+    height: 46px;
 }
 </style>

@@ -19,12 +19,17 @@
     </main>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 </template>
 
-<style scoped>      
+<style scoped>   
+    slot [name=header] {
+        height: 46px;
+        width: 100% ;
+    }
+
     main {
         background-color: #DCE6EF;
         border-radius: 5px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         padding: 2px;
         justify-content: center;

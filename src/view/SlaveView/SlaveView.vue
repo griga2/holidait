@@ -2,13 +2,20 @@
     import SlavesTable from './components/SlavesTable.vue';
 </script>
 
-<template>
-    <SlavesTable></SlavesTable>
+<template>  
+    <header>
+            
+    </header>
+    <main>
+      <SlavesTable></SlavesTable>
+    </main>
 </template>
 
 <style scoped lang="scss">
 
-
+header{
+    height: 100px;
+}
 
 .request {
   overflow: hidden;

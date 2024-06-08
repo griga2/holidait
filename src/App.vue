@@ -19,7 +19,7 @@
 
 <template>
         <main  
-            style="background-color: #C0D2E2;
+            style="background-color: #C0D2E6;
             overflow:hidden">
             <RouterView></RouterView>
         </main>
