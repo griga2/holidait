@@ -169,7 +169,17 @@ const clickDay = async (table,day,row) => {
                                     if (day.type === "empty" && !current_period.value) {
                                         console.log('create work day');
                                         current_slave.value = row.slaveId;
-                                        const data = {year:table?.year,mounth:table?.mounth,day:day?.number,slaveId:row.slaveId, update_year:data_now.value.year, update_mounth: data_now.value.mounth};
+                                        const data = {
+                                            year:table?.year,
+                                            mounth:table?.mounth,
+                                            day:day?.number,
+                                            slaveId:row.slaveId, 
+                                            update_year:data_now.value.year,
+                                            update_mounth: data_now.value.mounth,
+                                            start_time: start_time.value,
+                                            finish_time: finish_time.value,
+
+                                        };
                                         current_period.value = await store.CreateWorkDay(data);
                                     } 
         }
