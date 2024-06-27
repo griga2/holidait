@@ -199,12 +199,12 @@ const goRight  = () => {
     checkToUpdate();
 }
 
-onMounted(() => {
-    scroll_main.value.scrollLeft = 2500;
+onMounted(async () => {
     metka_go = true;
-    setTimeout(() => {
+    await setTimeout(() => {
         metka_go = false;
-    }, 5000)
+        scroll_main.value.scrollLeft = 2700;
+    }, 500)
 })
 
 const goLeft  = ( ) => {
@@ -225,7 +225,7 @@ const checkToUpdate = () => {
             metka_go = true;
             metka_go = await store.goTable('left');
             metka_go = false;
-        } else if (scroll_main.value.scrollWidth - scroll_main.value.scrollLeft < 2000 && !metka_go) {
+        } else if (scroll_main.value.scrollWidth - scroll_main.value.scrollLeft < 2100 && !metka_go) {
             console.log('go right')
             metka_go = true;
             metka_go = await store.goTable('right');
@@ -254,7 +254,7 @@ const finish_time = ref({
             <article 
                 @click="goLeft()"
                 class="nav_arraw"
-                style="left: 190px;"
+                style="left: 270px;"
                 :style="{
                     'margin-top':tables.value?.slaves.length * 42 + 'px'
                 }">
