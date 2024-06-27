@@ -72,7 +72,7 @@ export const useTableStore = defineStore('table_store', () => {
 
       return response.data.periodId;
     }
-
+    
     const deletePeriod = async (data) => {
       let config = {
         method: 'delete',
@@ -94,7 +94,46 @@ export const useTableStore = defineStore('table_store', () => {
 
       updateRow(data, response)
     }
+
+    const updateShift = async (data) => {
+      let config = {
+        method: 'put',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/shift`,
+        data : data,
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
+      };
+
+      const response = await axios.request(config);
+      console.log(data, response)
+
+      updateRow(data, response)
+    }
     
+    const deleteWorkday = async (data) => {
+      let config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: `${back_url.value}/shift`,
+        data : {
+          shiftId: data.shiftId ,
+          slaveId: data.slaveId,
+          update_year: data.update_year,
+          update_mounth: data.update_mounth
+        },
+        headers: {
+          authorization: `Bearer ${token.value}`
+        }
+      };
+
+      const response = await axios.request(config);
+      console.log(data, response)
+
+      updateRow(data, response)
+    }
+
     const updateRow = (data, response) => {
       tables.value.tables.map(table => {
             return table.rows.map( row => {
@@ -246,6 +285,7 @@ export const useTableStore = defineStore('table_store', () => {
 
     return { tables,
       current_period,
+      deleteWorkday,
       current_to_settings,
       current_slave,
       updatePeriod,
@@ -256,6 +296,7 @@ export const useTableStore = defineStore('table_store', () => {
       input_mode,
       CreateWorkDay,
       data_now,
+      updateShift,
       addSlave,
       updateSlave,
       deletePeriod, 
