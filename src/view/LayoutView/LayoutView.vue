@@ -39,6 +39,7 @@ import { ref } from 'vue'
                         <v-list-item link title="Кадры" @click="$router.push('/cadrs')"></v-list-item>
                         <v-list-item link title="Расписание отпусков" @click="$router.push('/table')"></v-list-item>
                         <v-list-item link title="Структура отделов" @click="$router.push('/structure')"></v-list-item>
+                        <v-list-item link title="Зарплаты" @click="$router.push('/selary_anal')"></v-list-item>
                     </v-list>
                     
 
@@ -80,7 +81,6 @@ import { ref } from 'vue'
 
         <v-main>
             <RouterView></RouterView>
-            
         </v-main>
     </v-app>
 </template>
