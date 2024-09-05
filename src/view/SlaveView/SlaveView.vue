@@ -1,5 +1,15 @@
 <script setup>
     import SlavesTable from './components/SlavesTable.vue';
+    import {useSlavesStore} from './store/index.js'
+    import { onMounted,  } from 'vue'
+    import {storeToRefs} from 'pinia';
+
+    const store = useSlavesStore();
+    const {} = storeToRefs(store)
+
+    onMounted(() => {
+      store.getSlaves();
+    })
 </script>
 
 <template>  

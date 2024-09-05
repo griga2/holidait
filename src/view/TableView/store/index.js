@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { reactive,ref } from "vue"
 import axios from 'axios'
 import {useGlobalStore} from '../../../store/global.store'
-
+import { PutRequest, PostRequest, DeleteRequest, GetRequest } from "../../../middlewire/api"
 export const useTableStore = defineStore('table_store', () => {
     
 
@@ -12,7 +12,7 @@ export const useTableStore = defineStore('table_store', () => {
     const back_url = ref(import.meta.env.VITE_API_ADRES);
     // const back_url = ref('https://api.holidator.ru')
 
-    const current_period = ref('');
+    const current_period = ref('');   
     const current_slave = ref('');
     const current_to_settings = ref('')
     const token = ref('')
